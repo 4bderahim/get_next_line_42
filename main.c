@@ -2,45 +2,64 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
-int func(int x)
+int funchioning_function(int x)
 {
     static int count;
 
     count += x;
     return count;
 }
+
 char *get_next_line(int fd)
 {
     char *buf;
+    char *tmp;
     static int stop;
-    buf = (char *) malloc(12);
-    if (!buf)
-        return (0);
-    buf[12] = '\0';
+
+    buf = calloc(1, 20);
+    tmp = calloc(1, 2);
     int i = 0;
     ssize_t cc;
-    while (buf[0] != '\n')// || buf[0] != '\n')
+
+    cc = 1;
+    printf("%d--\n", stop);
+    while (tmp[0] != '\n' && cc != 0 && i < 20)
         {
-                cc = read(fd, buf, 1);
-            i++; 
-            //printf("--->>>>>>{{{%c]\n", buf[0]);
+            if (stop > 0)
+            {
+                if (cc > stop)
+                {
+                    cc = read(fd, tmp, 1);  
+                    buf[i] = tmp[0];
+                }
+            }
+            else
+            {
+                cc = read(fd, tmp, 1);  
+                buf[i] = tmp[0];
+            }
+            i++;
         }
-    
-    printf("==[%d]===\n",i);
-    
-    
-    
-    //if (buf[0] != '\0')
-    cc = read(fd, buf,12);
-    printf("\t\t\t\t\t [[[%s]]<\n", buf);
+    stop = i;
+    free(tmp);
+
+    printf("{{%d}}", i);
+    //cc = read(fd, buf, i-1);
+    //printf("[%s]", buf);;
     return (buf);
 }
 int main()
 {
-    int t = open("text.txt", O_RDONLY);
+
+
+    int t = open("hello", O_RDONLY);
     int d = 0;
-    printf("__%s", get_next_line(t));
-    //printf("__%s", get_next_line(t));
-      
+
+
+
+    printf("__[%s", get_next_line(t));
+    printf("__[%s", get_next_line(t));
+   // printf("__[%s", get_next_line(t));
+    close(t);
     //printf("[%d}[%s]",i ,buf);
 }
