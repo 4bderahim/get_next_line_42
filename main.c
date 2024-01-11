@@ -2,9 +2,6 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include "get_next_line.h"
-int funchioning_function(int x)
-{
-    static int count;
 
 int main()
 {
