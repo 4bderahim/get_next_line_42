@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include "get_next_line.h"
 int funchioning_function(int x)
 {
     static int count;
@@ -15,35 +15,35 @@ char *get_next_line(int fd)
     char *buf;
     char *tmp;
     static int stop;
-
-    buf = calloc(1, 20);
-    tmp = calloc(1, 2);
+    
+    buf = calloc(1,20);
+    tmp = calloc(1,2);
     int i = 0;
+    int j = 0;
     ssize_t cc;
 
     cc = 1;
-    printf("%d--\n", stop);
-    while (tmp[0] != '\n' && cc != 0 && i < 20)
+    while (tmp[0] != '\n' && cc != 0 && j < 20)
         {
-            if (stop > 0)
-            {
-                if (cc > stop)
+            if (i >= stop && stop > 0)
                 {
                     cc = read(fd, tmp, 1);  
-                    buf[i] = tmp[0];
                 }
-            }
             else
             {
                 cc = read(fd, tmp, 1);  
-                buf[i] = tmp[0];
+                
+            }
+            if (tmp[0] != '\n')
+            {
+                buf[j] = tmp[0];
             }
             i++;
+            j++;
         }
     stop = i;
     free(tmp);
-
-    printf("{{%d}}", i);
+  //  printf("{{%d}}", i);
     //cc = read(fd, buf, i-1);
     //printf("[%s]", buf);;
     return (buf);
@@ -57,8 +57,25 @@ int main()
 
 
 
-    printf("__[%s", get_next_line(t));
-    printf("__[%s", get_next_line(t));
+    printf("[%s]\n", get_next_line(t));
+    printf("[%s]\n", get_next_line(t));
+    printf("[%s]\n", get_next_line(t));
+    printf("[%s]\n", get_next_line(t));
+
+    printf("[%s]\n", get_next_line(t));
+    printf("[%s]\n", get_next_line(t));
+    printf("[%s]\n", get_next_line(t));
+    printf("[%s]\n", get_next_line(t));
+
+    printf("[%s]\n", get_next_line(t));
+    printf("[%s]\n", get_next_line(t));
+    printf("[%s]\n", get_next_line(t));
+    printf("[%s]\n", get_next_line(t));
+
+    printf("[%s]\n", get_next_line(t));
+    printf("[%s]\n", get_next_line(t));
+    printf("[%s]\n", get_next_line(t));
+    printf("[%s]\n", get_next_line(t));
    // printf("__[%s", get_next_line(t));
     close(t);
     //printf("[%d}[%s]",i ,buf);
