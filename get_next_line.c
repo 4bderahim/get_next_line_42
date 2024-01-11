@@ -6,7 +6,9 @@ char *get_next_line(int fd)
     char *buf;
     char *tmp;
     static int stop;
-    
+    char *ret;
+    if (write(fd, "", 0) < 0)   
+        return (0);
     buf = calloc(1,20);
     tmp = calloc(1,2);
     int i = 0;
@@ -32,10 +34,14 @@ char *get_next_line(int fd)
             i++;
             j++;
         }
+    if (cc == 0)
+        return (0);
     stop = i;
     free(tmp);
   //  printf("{{%d}}", i);
     //cc = read(fd, buf, i-1);
     //printf("[%s]", buf);;
-    return (buf);
+    ret = get_buf(&buf);
+    free(buf);
+    return (ret);
 }
