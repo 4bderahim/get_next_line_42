@@ -38,9 +38,6 @@ char *get_next_line(int fd)
         return (0);
     stop = i;
     free(tmp);
-  //  printf("{{%d}}", i);
-    //cc = read(fd, buf, i-1);
-    //printf("[%s]", buf);;
     ret = get_buf(&buf);
     free(buf);
     return (ret);
