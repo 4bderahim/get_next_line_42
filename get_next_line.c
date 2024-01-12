@@ -8,22 +8,19 @@ char *get_next_line(int fd)
     char *buf;
     char *tmp;
     static char *pocket;
-
+    int i;
     
     char *ret;
-    if (write(fd, "", 0) < 0)   
-        return (0);
-    buf = calloc(1,BUFFER_SIZE);
-    tmp = calloc(1,BUFFER_SIZE);
-  
     ssize_t cc;
-    
+    i = 1;
     cc = 1;
     while (cc != 0)
         {
+            tmp = (char *)realloc(tmp , BUFFER_SIZE*i);
+            buf = (char *)realloc(tmp , BUFFER_SIZE*i);
             cc = read(fd, tmp, BUFFER_SIZE);
             ret = strchr(tmp, '\n');
-            if (cc != 0 && ret)
+            if ((cc == 0 || ret) && tmp[0] != 0)
             {
                 if (ret[1] != '\0')
                     {
@@ -31,22 +28,21 @@ char *get_next_line(int fd)
                         strlcat(pocket, ret, strlen(ret));
                         pocket[BUFFER_SIZE] = 0;
                     }
+                while(*tmp != '\n' || *tmp != 0)
+                {
+                    *buf = *tmp;
+                    buf++;
+                    tmp++;
+                }
 
             }
-            else 
-            {
-                
-            }
-            strlcat(buf, ret, strlen(buf));
-
-            
+            i++;
         }
     if (cc == 0)
         return (0);
+    
     free(tmp);
-    ret = get_buf(&buf);
-    free(buf);
-    return (ret);
+    return (buf);
 }
 
 
