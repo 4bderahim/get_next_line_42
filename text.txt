@@ -1,6 +1,0 @@
-hello world
-t file
-
-none of the above!
-
-end!
