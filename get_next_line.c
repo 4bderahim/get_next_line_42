@@ -1,7 +1,9 @@
 #include "get_next_line.h"
 
 
-
+// #ifndef BUFFER_SIZE
+// #define 
+// #endif
 
 char *get_next_line(int fd)
 {
@@ -9,38 +11,49 @@ char *get_next_line(int fd)
     char *tmp;
     static char *pocket;
     int i;
-    
+    int BUFFER_SIZE  = 12;
     char *ret;
     ssize_t cc;
     i = 1;
     cc = 1;
+    buf = NULL;
+    tmp = NULL;
     while (cc != 0)
         {
-            tmp = (char *)realloc(tmp , BUFFER_SIZE*i);
-            buf = (char *)realloc(tmp , BUFFER_SIZE*i);
+            
+
+            tmp = (char *)realloc(tmp , (BUFFER_SIZE*i)+1);
+            buf = (char *)realloc(buf , (BUFFER_SIZE*i)+1);
+            tmp[BUFFER_SIZE*i] = 0;
+            buf[BUFFER_SIZE*i] = 0;
             cc = read(fd, tmp, BUFFER_SIZE);
+             
             ret = strchr(tmp, '\n');
-            if ((cc == 0 || ret) && tmp[0] != 0)
+           
+            if ((ret) && tmp[0] != 0)
             {
                 if (ret[1] != '\0')
                     {
-                        pocket = (char *) realloc(pocket, strlen(ret));
-                        strlcat(pocket, ret, strlen(ret));
-                        pocket[BUFFER_SIZE] = 0;
+                        pocket = (char *) realloc(pocket, strlen(ret)+1);
+                        pocket[strlen(ret)] = 0;
+                        strlcat(pocket, ret, strlen(pocket));
+                        //pocket[BUFFER_SIZE] = 0;
                     }
-                while(*tmp != '\n' || *tmp != 0)
+                int i = 0;
+                while(tmp[i] !='\n')//tmp != ret)
                 {
-                    *buf = *tmp;
-                    buf++;
-                    tmp++;
+                    buf[i] = tmp[i];
+                    i++;
+                    
                 }
-
+                break;
+               
             }
             i++;
         }
     if (cc == 0)
         return (0);
-    
+   // printf("reserve : %s\n", pocket);
     free(tmp);
     return (buf);
 }

@@ -6,18 +6,11 @@
 int main()
 {
 
-    // int t = open("hello", O_RDONLY);
+     int t = open("hello", O_RDONLY);
     // int d = 0;
 
-    char *buf;
-    buf = (char *) malloc(10);
-    buf[10] = 0;
-    printf("%lu\n", sizeof(buf));
-    buf = (char *) realloc(buf, 20);
-    buf[20] = 0;
-    printf("%lu", sizeof(char) * 20);
-    free(buf);
-    printf("__[%lu", BUFFER_SIZE);
-    //close(t);
+   printf("__[%s", get_next_line(t));
+   printf("__[%s", get_next_line(t));
+    close(t);
     //printf("[%d}[%s]",i ,buf);
 }
