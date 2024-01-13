@@ -6,9 +6,9 @@
 int main()
 {
 
-     int t = open("hello", O_RDONLY);
-    // int d = 0;
-
+    int t = open("hello", O_RDONLY);
+    //int d = 0;
+   
    printf("\n\n\n[%s]\n", get_next_line(t));
    printf("[%s]", get_next_line(t));
    //system("leaks -q a.out");

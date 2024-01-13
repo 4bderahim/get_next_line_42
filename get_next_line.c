@@ -4,18 +4,7 @@
 // #ifndef BUFFER_SIZE
 // #define 
 // #endif
-void hel()
-{
-    return;
-}
-void hel()
-{
-    return;
-}
-void hel()
-{
-    return;
-}
+
 size_t	ft_strlcat_next_line(char *dst, const char *src, size_t dstsize)
 {
 	size_t	dstlen;
@@ -23,18 +12,16 @@ size_t	ft_strlcat_next_line(char *dst, const char *src, size_t dstsize)
 	size_t	i;
 	size_t	dstlen_increased;
 
-	dstlen = ft_strlen(dst);
-	srclen = ft_strlen(src);
+	dstlen = strlen(dst);
+	srclen = strlen(src);
 	dstlen_increased = dstlen;
 	i = 0;
-	while (src[i] && dstlen_increased < dstsize - 1)
+	while (src[i] && dstlen_increased < dstsize - 1 && src[i] != '\n')
 	{
-        if (src[i] == '\n')
-        {
 		    dst[dstlen_increased] = src[i];
 		    i++;
 		    dstlen_increased++;
-        }
+     
 	}
 	dst[dstlen_increased] = '\0';
 	return (dstlen + srclen);
@@ -57,54 +44,24 @@ char *get_next_line(int fd)
     while (cc != 0)
         {
 
-
-
-
-
-            
             pocket = (char *)realloc(pocket , (BUFFER_SIZE*i)+1);
-            
-            
             pocket[BUFFER_SIZE*i] = 0;
-            cc = read(fd, tmp, BUFFER_SIZE);
+            cc = read(fd, pocket, BUFFER_SIZE);
+            ret = strchr(pocket, '\n');
              
-            ret = strchr(tmp, '\n');
-          
-            if (pocket != NULL)  
+            if ((ret))
             {
-                strcpy(buf, pocket);
-                printf("##%s||%s\n", pocket, buf);
-
-            }
-             
-            if ((ret) && tmp[0] != 0)
-            {
-                if (ret[1] != '\0')
-                    {
-                        pocket = (char *) realloc(pocket, strlen(ret)+1);
-                        pocket[strlen(ret)] = 0;
-                        // printf("{{{%s}}}\n", pocket);
-                        strlcat(pocket, ret+1, strlen(pocket));
-                        //printf("[[%s]]\n", );
-                        //strlcat(pocket, ret, strlen(pocket)); 
-                    }
-                int i = 0;
-                while(tmp[i] !='\n')//tmp != ret)
-                {
-                    buf[i] = tmp[i];
-                    i++;
-                }
+                tmp = (char *)realloc(tmp, strlen(ret)+1);
+                tmp[strlen(ret)] = 0;
+                buf = (char *)realloc(buf, (((int) ret)-((int) pocket)));
+                buf[(((int) ret)-((int) pocket))] = 0;
+                strncpy(buf, pocket, (((int) ret)-((int) pocket)));
+                strncpy(pocket, ret+1, strlen(ret));
+                free(tmp);
                 break;
             }
             i++;
         }
-    // if (cc == 0)
-    //     return (0);
-    //if (cc == 0)
-    printf("\t\t\t[%s||%s]\n", buf, pocket);
-    //free(pocket);
-    free(tmp);
-    
     return (buf);
 }
 
