@@ -40,7 +40,7 @@ char *get_next_line(int fd)
     i = 1;
     cc = 1;
     buf = NULL;
-    tmp = NULL;
+    tmp = NULL; 
     while (cc != 0)
         {
 
@@ -53,10 +53,14 @@ char *get_next_line(int fd)
             {
                 tmp = (char *)realloc(tmp, strlen(ret)+1);
                 tmp[strlen(ret)] = 0;
-                buf = (char *)realloc(buf, (((int) ret)-((int) pocket)));
-                buf[(((int) ret)-((int) pocket))] = 0;
-                strncpy(buf, pocket, (((int) ret)-((int) pocket)));
-                strncpy(pocket, ret+1, strlen(ret));
+                
+                buf = (char *)realloc(buf, ((int) ret)-((int) pocket));
+                printf("\n\n\t\t\t\t%d\n\n\n", ((int) ret)-((int) pocket));
+                buf[((int) ret)-((int) pocket)-1] = 0;
+                printf("%s", buf);
+                strncpy(buf, pocket, (((int) ret)-((int) pocket))+1);
+                printf("\t\t\t>%s", buf);
+                strncpy(pocket, ret+1, strlen(ret)+1);
                 free(tmp);
                 break;
             }
