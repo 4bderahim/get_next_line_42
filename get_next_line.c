@@ -62,10 +62,10 @@ char *get_next_line(int fd)
 
 
             
-            pocket = (char *)realloc(tmp , (BUFFER_SIZE*i)+1);
-            buf = (char *)realloc(buf , (BUFFER_SIZE*i)+1);
-            tmp[BUFFER_SIZE*i] = 0;
-            buf[BUFFER_SIZE*i] = 0;
+            pocket = (char *)realloc(pocket , (BUFFER_SIZE*i)+1);
+            
+            
+            pocket[BUFFER_SIZE*i] = 0;
             cc = read(fd, tmp, BUFFER_SIZE);
              
             ret = strchr(tmp, '\n');
