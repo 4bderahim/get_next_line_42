@@ -40,6 +40,7 @@ size_t	ft_strlcat_next_line(char *dst, const char *src, size_t dstsize)
 	return (dstlen + srclen);
 }
 
+
 char *get_next_line(int fd)
 {
     char *buf;
@@ -55,7 +56,13 @@ char *get_next_line(int fd)
     tmp = NULL;
     while (cc != 0)
         {
-            tmp = (char *)realloc(tmp , (BUFFER_SIZE*i)+1);
+
+
+
+
+
+            
+            pocket = (char *)realloc(tmp , (BUFFER_SIZE*i)+1);
             buf = (char *)realloc(buf , (BUFFER_SIZE*i)+1);
             tmp[BUFFER_SIZE*i] = 0;
             buf[BUFFER_SIZE*i] = 0;
@@ -100,6 +107,7 @@ char *get_next_line(int fd)
     
     return (buf);
 }
+
 
 
 
