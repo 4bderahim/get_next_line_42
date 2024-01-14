@@ -73,6 +73,7 @@ char *get_next_line(int fd)
     int BUFFER_SIZE  = 12;
     char *ret;
     ssize_t cc;
+    d\nf\d\ndgn\n
     i = 1;
     cc = 1;
     buf = NULL;
@@ -102,6 +103,7 @@ char *get_next_line(int fd)
                 buf  = ft_strjoin("", pocket,(((int) ret)-((int) pocket))+1);
                 printf("??%s\n", buf);
                 strncpy(pocket, ret, strlen(ret));
+                printf("\n\n\t%s", pocket);
                 break;
             }
             i++;
