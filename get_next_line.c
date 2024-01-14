@@ -27,7 +27,10 @@ size_t	ft_strlcat_next_line(char *dst, const char *src, size_t dstsize)
 	return (dstlen + srclen);
 }
 
-
+void buf_pocket(char *buf, static char *pocket, int length)
+{
+    
+}
 char *get_next_line(int fd)
 {
     char *buf;
@@ -43,6 +46,13 @@ char *get_next_line(int fd)
     tmp = NULL; 
     while (cc != 0)
         {
+            if (pocket != NULL)
+            {
+                if (strchr(pocket, '\n'))
+                    {
+
+                    }
+            }
 
             pocket = (char *)realloc(pocket , (BUFFER_SIZE*i)+1);
             pocket[BUFFER_SIZE*i] = 0;
@@ -53,14 +63,20 @@ char *get_next_line(int fd)
             {
                 tmp = (char *)realloc(tmp, strlen(ret)+1);
                 tmp[strlen(ret)] = 0;
-                
-                buf = (char *)realloc(buf, ((int) ret)-((int) pocket));
-                printf("\n\n\t\t\t\t%d\n\n\n", ((int) ret)-((int) pocket));
-                buf[((int) ret)-((int) pocket)-1] = 0;
-                printf("%s", buf);
-                strncpy(buf, pocket, (((int) ret)-((int) pocket))+1);
-                printf("\t\t\t>%s", buf);
-                strncpy(pocket, ret+1, strlen(ret)+1);
+                buf = (char *)realloc(buf, (((int) ret)-((int) pocket))+1); 
+                buf[((int) ret)-((int) pocket)] = 0;
+                // int x = 0;
+                // while (x <= (((int) ret-1)-((int) pocket)) )
+                // {
+                //     buf[x] = pocket[x];
+                //     printf("%s|%s\n", buf, pocket);
+                //     x++;
+                // }
+                strncpy(buf, pocket, (((int) ret-1)-((int) pocket))+1);
+                printf("\t|%s||%s\n", buf, ret);
+                strncpy(pocket, ret+1, strlen(ret+1)+1);
+
+                printf("\t\t\t>%s", pocket);
                 free(tmp);
                 break;
             }

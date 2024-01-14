@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include <string.h>
 
+
+
 #ifndef GETNL
 #define GETNL
 char *get_next_line(int fd);
