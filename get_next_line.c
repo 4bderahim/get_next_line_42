@@ -78,6 +78,8 @@ char *get_next_line(int fd)
 	char *buffer;
 	int i;
     pocket  = line_join(pocket, fd);
+	if (fd < 0)
+		return(NULL);
 	if (*pocket == '\0')
 				return (NULL);
 	new_line_check = ft_strchr(pocket, '\n');
@@ -86,8 +88,10 @@ char *get_next_line(int fd)
 		if (new_line_check[1] == '\0')
 			{
 				buffer = pocket;
+				buffer = ft_strjoin("", pocket);
+				buffer[ft_strlen(pocket)-1] = 0;
 				pocket = NULL;
-				return (buffer);
+				free(pocket);
 			}
 		else
 		{
@@ -100,11 +104,10 @@ char *get_next_line(int fd)
 			}
 			pocket = ft_strjoin("", new_line_check+1);
 		}
+		return (buffer);
 	}
-    return (buffer);
+    return (NULL);
 }
-
-
 
 
 
