@@ -1,7 +1,5 @@
 #include "get_next_line.h"
 
-
-
 static void	join_the_two_strings(char *all, char const *s1, char const *s2)
 {
 	size_t	i;
@@ -11,11 +9,12 @@ static void	join_the_two_strings(char *all, char const *s1, char const *s2)
 	
 	if (s1 !=0)
 	{
-	while (s1[i])
-	{
-		all[i] = s1[i];
-		i++;
-	}}
+		while (s1[i])
+		{
+			all[i] = s1[i];
+			i++;
+		}
+	}
 	j = 0;
 	while (s2[j])
 	{
@@ -61,7 +60,7 @@ char *line_join(char *pocket, int fd)
 	{
 		cc = read(fd ,buf, BUFFER_SIZE);
 		pocket = ft_strjoin(pocket, buf);
-		check = strchr(buf, '\n');
+		check = ft_strchr(buf, '\n');
 		if (check)
 		{
 			free(buf);
@@ -73,20 +72,6 @@ char *line_join(char *pocket, int fd)
 	free(buf);
 	return (pocket);
     }
-
-char    *ft_strchr(const char *s, int c)
-{
-        int     i;
-
-        i = 0;
-        while (s[i] != ((char)c))
-        {
-                if (s[i] == '\0')
-                        return (0);
-                i++;
-        }
-        return ((char *)s + i);
-}
 char *get_next_line(int fd)
 {
 	static char *pocket;
@@ -94,29 +79,20 @@ char *get_next_line(int fd)
 	char *buffer;
 	int i;
     pocket  = line_join(pocket, fd);
-	if (pocket == NULL)
-		{
-			printf("NULL accurs");
-			return (NULL);
-		}
-	//printf("\t\t\t\t\t%s\n", pocket)	;
-	// printf(">>>>>>[%s]<<<<<<<\n", pocket);
+	if (*pocket == '\0')
+				return (NULL);
 	new_line_check = ft_strchr(pocket, '\n');
 	if (new_line_check)
 	{
 		if (new_line_check[1] == '\0')
 			{
-				//printf("\t\t\t!%s!\n", pocket);
 				buffer = pocket;
 				pocket = NULL;
-				//buffer[strlen(pocket)-1] = '\0';	
-				//free(pocket);
 				return (buffer);
-				
 			}
 		else
 		{
-			buffer = (char *) calloc(1, (((long) new_line_check)-((long) pocket))+1);
+			buffer = (char *) ft_calloc(1, (((long) new_line_check)-((long) pocket))+1);
 			int i =0;
 			while(pocket[i] != '\n')
 			{

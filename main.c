@@ -8,7 +8,6 @@ int main()
 
     int t = open("hello", O_RDONLY);
     //int d = 0;
-   printf("%d", t);
    printf("\n\n\n=%s=\n", get_next_line(t));
   printf("=%s|=\n", get_next_line(t));
    printf("[%s]\n", get_next_line(t));
