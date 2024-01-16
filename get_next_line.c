@@ -52,7 +52,6 @@ char *line_join(char *pocket, int fd)
 	char *buf;
 	int cc;
 	char *check;
-	int BUFFER_SIZE = 12;
 
 	buf = (char *) calloc(1, BUFFER_SIZE+1);
 	cc = 1;
@@ -93,7 +92,7 @@ char *get_next_line(int fd)
 		else
 		{
 			buffer = (char *) ft_calloc(1, (((long) new_line_check)-((long) pocket))+1);
-			int i =0;
+			i =0;
 			while(pocket[i] != '\n')
 			{
 				buffer[i] = pocket[i];
