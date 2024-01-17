@@ -45,20 +45,21 @@ char	*ft_strjoin(char *s1, char *s2)
 	allocated[string_len] = '\0';
 	return (allocated);
 }
-
 char *line_join(char *pocket, int fd)
 {
 	
 	char *buf;
 	int cc;
 	char *check;
-
+	char *tmp;
 	buf = (char *) calloc(1, BUFFER_SIZE+1);
 	cc = 1;
 	while (cc != 0)
 	{
 		cc = read(fd ,buf, BUFFER_SIZE);
 		pocket = ft_strjoin(pocket, buf);
+		tmp = pocket;
+		free(pocket);
 		check = ft_strchr(buf, '\n');
 		if (check)
 		{
@@ -70,7 +71,33 @@ char *line_join(char *pocket, int fd)
 	}
 	free(buf);
 	return (pocket);
-    }
+}
+
+// char *line_join(char *pocket, int fd)
+// {
+	
+// 	char *buf;
+// 	int cc;
+// 	char *check;
+
+// 	buf = (char *) calloc(1, BUFFER_SIZE+1);
+// 	cc = 1;
+// 	while (cc != 0)
+// 	{
+// 		cc = read(fd ,buf, BUFFER_SIZE);
+// 		pocket = ft_strjoin(pocket, buf);
+// 		check = ft_strchr(buf, '\n');
+// 		if (check)
+// 		{
+// 			free(buf);
+// 			return (pocket);
+// 		}
+// 		if (cc == -1)
+// 			return (NULL);
+// 	}
+// 	free(buf);
+// 	return (pocket);
+//     }
 char *get_next_line(int fd)
 {
 	static char *pocket;
