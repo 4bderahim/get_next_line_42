@@ -11,10 +11,7 @@ int main()
    printf("=%s=\n", get_next_line(t));
    printf("=[%s]=\n", get_next_line(t));
    printf("=[%s]=\n", get_next_line(t));
-   printf("=[%s]=\n", get_next_line(t));
-   printf("=[%s]=\n", get_next_line(t));
-   printf("=[%s]=\n", get_next_line(t));
-   printf("=[%s]=\n", get_next_line(t));
+
    printf("=[%s]=\n", get_next_line(t));
    printf("=[%s]=\n", get_next_line(t));
    printf("=[%s]=\n", get_next_line(t));
