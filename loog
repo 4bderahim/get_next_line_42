@@ -1,0 +1,630 @@
+Error in test 4: get_next_line(5: "Invalid fd"): 
+Memory leak: 0x602000000130 - 1 bytes
+You failed to free the memory allocated at:
+     in _add_malloc malloc_mock.c:29:8
+     in malloc malloc_mock.c:75:10
+  -> in ft_strjoin get_next_line.c:40:12
+     in line_join get_next_line.c:68:10
+     in get_next_line get_next_line.c:153:13
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:103:2
+
+Memory leak: 0x602000000170 - 1 bytes
+You failed to free the memory allocated at:
+     in _add_malloc malloc_mock.c:29:8
+     in malloc malloc_mock.c:75:10
+  -> in ft_strjoin get_next_line.c:40:12
+     in line_join get_next_line.c:68:10
+     in get_next_line get_next_line.c:153:13
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:103:2
+
+=================================================================
+==28115==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000012f at pc 0x000109b8896e bp 0x7ffee6083eb0 sp 0x7ffee6083ea8
+READ of size 1 at 0x60200000012f thread T0
+    #0 0x109b8896d in pocket_change get_next_line.c:119
+    #1 0x109b88c81 in get_next_line get_next_line.c:162
+    #2 0x109b87b40 in test_gnl_func file_utils.c:40
+    #3 0x109b7ed9e in main tester.c:129
+    #4 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+0x60200000012f is located 1 bytes to the left of 2-byte region [0x602000000130,0x602000000132)
+allocated by thread T0 here:
+    #0 0x10d197793 in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x61793)
+    #1 0x109b81bcc in malloc malloc_mock.c:65
+    #2 0x109b882ee in ft_strjoin get_next_line.c:40
+    #3 0x109b886d9 in line_join get_next_line.c:68
+    #4 0x109b88c28 in get_next_line get_next_line.c:153
+    #5 0x109b87b40 in test_gnl_func file_utils.c:40
+    #6 0x109b7ed9e in main tester.c:129
+    #7 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow get_next_line.c:119 in pocket_change
+Error in test 1: get_next_line(5: "only_nl.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in pocket_change get_next_line.c:119:9
+     in get_next_line get_next_line.c:162:11
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:129:2
+
+=================================================================
+==28118==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000012f at pc 0x000109b8896e bp 0x7ffee6083eb0 sp 0x7ffee6083ea8
+READ of size 1 at 0x60200000012f thread T0
+    #0 0x109b8896d in pocket_change get_next_line.c:119
+    #1 0x109b88c81 in get_next_line get_next_line.c:162
+    #2 0x109b87b40 in test_gnl_func file_utils.c:40
+    #3 0x109b7f3c9 in main tester.c:135
+    #4 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+0x60200000012f is located 1 bytes to the left of 2-byte region [0x602000000130,0x602000000132)
+allocated by thread T0 here:
+    #0 0x10d197793 in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x61793)
+    #1 0x109b81bcc in malloc malloc_mock.c:65
+    #2 0x109b882ee in ft_strjoin get_next_line.c:40
+    #3 0x109b886d9 in line_join get_next_line.c:68
+    #4 0x109b88c28 in get_next_line get_next_line.c:153
+    #5 0x109b87b40 in test_gnl_func file_utils.c:40
+    #6 0x109b7f3c9 in main tester.c:135
+    #7 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow get_next_line.c:119 in pocket_change
+Error in test 1: get_next_line(5: "multiple_nl.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in pocket_change get_next_line.c:119:9
+     in get_next_line get_next_line.c:162:11
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:135:2
+
+=================================================================
+==28120==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000012f at pc 0x000109b8896e bp 0x7ffee6083eb0 sp 0x7ffee6083ea8
+READ of size 1 at 0x60200000012f thread T0
+    #0 0x109b8896d in pocket_change get_next_line.c:119
+    #1 0x109b88c81 in get_next_line get_next_line.c:162
+    #2 0x109b87b40 in test_gnl_func file_utils.c:40
+    #3 0x109b7fb30 in main tester.c:145
+    #4 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+0x60200000012f is located 1 bytes to the left of 2-byte region [0x602000000130,0x602000000132)
+allocated by thread T0 here:
+    #0 0x10d197793 in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x61793)
+    #1 0x109b81bcc in malloc malloc_mock.c:65
+    #2 0x109b882ee in ft_strjoin get_next_line.c:40
+    #3 0x109b886d9 in line_join get_next_line.c:68
+    #4 0x109b88c28 in get_next_line get_next_line.c:153
+    #5 0x109b87b40 in test_gnl_func file_utils.c:40
+    #6 0x109b7fb30 in main tester.c:145
+    #7 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow get_next_line.c:119 in pocket_change
+Error in test 1: get_next_line(5: "variable_nls.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in pocket_change get_next_line.c:119:9
+     in get_next_line get_next_line.c:162:11
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:145:2
+
+=================================================================
+==28122==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6020000003af at pc 0x000109b8896e bp 0x7ffee6083eb0 sp 0x7ffee6083ea8
+READ of size 1 at 0x6020000003af thread T0
+    #0 0x109b8896d in pocket_change get_next_line.c:119
+    #1 0x109b88c81 in get_next_line get_next_line.c:162
+    #2 0x109b87b40 in test_gnl_func file_utils.c:40
+    #3 0x109b804c0 in main tester.c:162
+    #4 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+0x6020000003af is located 1 bytes to the left of 12-byte region [0x6020000003b0,0x6020000003bc)
+allocated by thread T0 here:
+    #0 0x10d197793 in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x61793)
+    #1 0x109b81bcc in malloc malloc_mock.c:65
+    #2 0x109b882ee in ft_strjoin get_next_line.c:40
+    #3 0x109b886d9 in line_join get_next_line.c:68
+    #4 0x109b88c28 in get_next_line get_next_line.c:153
+    #5 0x109b87b40 in test_gnl_func file_utils.c:40
+    #6 0x109b804c0 in main tester.c:162
+    #7 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow get_next_line.c:119 in pocket_change
+Error in test 1: get_next_line(5: "lines_around_10.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in pocket_change get_next_line.c:119:9
+     in get_next_line get_next_line.c:162:11
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:162:2
+
+=================================================================
+==28124==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6020000003af at pc 0x000109b8896e bp 0x7ffee6083eb0 sp 0x7ffee6083ea8
+READ of size 1 at 0x6020000003af thread T0
+    #0 0x109b8896d in pocket_change get_next_line.c:119
+    #1 0x109b88c81 in get_next_line get_next_line.c:162
+    #2 0x109b87b40 in test_gnl_func file_utils.c:40
+    #3 0x109b80c35 in main tester.c:193
+    #4 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+0x6020000003af is located 1 bytes to the left of 12-byte region [0x6020000003b0,0x6020000003bc)
+allocated by thread T0 here:
+    #0 0x10d197793 in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x61793)
+    #1 0x109b81bcc in malloc malloc_mock.c:65
+    #2 0x109b882ee in ft_strjoin get_next_line.c:40
+    #3 0x109b886d9 in line_join get_next_line.c:68
+    #4 0x109b88c28 in get_next_line get_next_line.c:153
+    #5 0x109b87b40 in test_gnl_func file_utils.c:40
+    #6 0x109b80c35 in main tester.c:193
+    #7 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow get_next_line.c:119 in pocket_change
+Error in test 1: get_next_line(5: "read_error.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in pocket_change get_next_line.c:119:9
+     in get_next_line get_next_line.c:162:11
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:193:2
+
+Error in test 1: get_next_line(0: "stdin"): expected: "0123456789\n", got: <NULL>
+Error in test 1: get_next_line(0: "stdin"): not enough memory allocated, needed: 12, reserved: 0
+Could not find the corresponding allocation or the pointer 0x0
+should reserve space for the string: "0123456789\n"
+Error in test 2: get_next_line(0: "stdin"): expected: "012345678\n", got: <NULL>
+Error in test 2: get_next_line(0: "stdin"): not enough memory allocated, needed: 11, reserved: 0
+Could not find the corresponding allocation or the pointer 0x0
+should reserve space for the string: "012345678\n"
+Error in test 3: get_next_line(0: "stdin"): expected: "90123456789\n", got: <NULL>
+Error in test 3: get_next_line(0: "stdin"): not enough memory allocated, needed: 13, reserved: 0
+Could not find the corresponding allocation or the pointer 0x0
+should reserve space for the string: "90123456789\n"
+Error in test 4: get_next_line(0: "stdin"): expected: "0123456789\n", got: <NULL>
+Error in test 4: get_next_line(0: "stdin"): not enough memory allocated, needed: 12, reserved: 0
+Could not find the corresponding allocation or the pointer 0x0
+should reserve space for the string: "0123456789\n"
+Error in test 5: get_next_line(0: "stdin"): expected: "xxxx\n", got: <NULL>
+Error in test 5: get_next_line(0: "stdin"): not enough memory allocated, needed: 6, reserved: 0
+Could not find the corresponding allocation or the pointer 0x0
+should reserve space for the string: "xxxx\n"
+Error in test 4: get_next_line(5: "Invalid fd"): 
+Memory leak: 0x602000000130 - 1 bytes
+You failed to free the memory allocated at:
+     in _add_malloc malloc_mock.c:29:8
+     in malloc malloc_mock.c:75:10
+  -> in ft_strjoin get_next_line.c:40:12
+     in line_join get_next_line.c:68:10
+     in get_next_line get_next_line.c:153:13
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:103:2
+
+Memory leak: 0x602000000170 - 1 bytes
+You failed to free the memory allocated at:
+     in _add_malloc malloc_mock.c:29:8
+     in malloc malloc_mock.c:75:10
+  -> in ft_strjoin get_next_line.c:40:12
+     in line_join get_next_line.c:68:10
+     in get_next_line get_next_line.c:153:13
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:103:2
+
+=================================================================
+==28147==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000012f at pc 0x0001028697ce bp 0x7ffeed399e70 sp 0x7ffeed399e68
+READ of size 1 at 0x60200000012f thread T0
+    #0 0x1028697cd in pocket_change get_next_line.c:119
+    #1 0x102869ae1 in get_next_line get_next_line.c:162
+    #2 0x1028689a0 in test_gnl_func file_utils.c:40
+    #3 0x10285e829 in main tester.c:129
+    #4 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+0x60200000012f is located 1 bytes to the left of 2-byte region [0x602000000130,0x602000000132)
+allocated by thread T0 here:
+    #0 0x10628c793 in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x61793)
+    #1 0x102862a2c in malloc malloc_mock.c:65
+    #2 0x10286914e in ft_strjoin get_next_line.c:40
+    #3 0x102869539 in line_join get_next_line.c:68
+    #4 0x102869a88 in get_next_line get_next_line.c:153
+    #5 0x1028689a0 in test_gnl_func file_utils.c:40
+    #6 0x10285e829 in main tester.c:129
+    #7 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow get_next_line.c:119 in pocket_change
+Error in test 1: get_next_line(5: "only_nl.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in pocket_change get_next_line.c:119:9
+     in get_next_line get_next_line.c:162:11
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:129:2
+
+=================================================================
+==28149==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000012f at pc 0x0001028697ce bp 0x7ffeed399e70 sp 0x7ffeed399e68
+READ of size 1 at 0x60200000012f thread T0
+    #0 0x1028697cd in pocket_change get_next_line.c:119
+    #1 0x102869ae1 in get_next_line get_next_line.c:162
+    #2 0x1028689a0 in test_gnl_func file_utils.c:40
+    #3 0x10285ee54 in main tester.c:135
+    #4 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+0x60200000012f is located 1 bytes to the left of 6-byte region [0x602000000130,0x602000000136)
+allocated by thread T0 here:
+    #0 0x10628c793 in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x61793)
+    #1 0x102862a2c in malloc malloc_mock.c:65
+    #2 0x10286914e in ft_strjoin get_next_line.c:40
+    #3 0x102869539 in line_join get_next_line.c:68
+    #4 0x102869a88 in get_next_line get_next_line.c:153
+    #5 0x1028689a0 in test_gnl_func file_utils.c:40
+    #6 0x10285ee54 in main tester.c:135
+    #7 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow get_next_line.c:119 in pocket_change
+Error in test 1: get_next_line(5: "multiple_nl.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in pocket_change get_next_line.c:119:9
+     in get_next_line get_next_line.c:162:11
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:135:2
+
+=================================================================
+==28151==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000012f at pc 0x0001028697ce bp 0x7ffeed399e70 sp 0x7ffeed399e68
+READ of size 1 at 0x60200000012f thread T0
+    #0 0x1028697cd in pocket_change get_next_line.c:119
+    #1 0x102869ae1 in get_next_line get_next_line.c:162
+    #2 0x1028689a0 in test_gnl_func file_utils.c:40
+    #3 0x10285f5bb in main tester.c:145
+    #4 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+0x60200000012f is located 1 bytes to the left of 11-byte region [0x602000000130,0x60200000013b)
+allocated by thread T0 here:
+    #0 0x10628c793 in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x61793)
+    #1 0x102862a2c in malloc malloc_mock.c:65
+    #2 0x10286914e in ft_strjoin get_next_line.c:40
+    #3 0x102869539 in line_join get_next_line.c:68
+    #4 0x102869a88 in get_next_line get_next_line.c:153
+    #5 0x1028689a0 in test_gnl_func file_utils.c:40
+    #6 0x10285f5bb in main tester.c:145
+    #7 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow get_next_line.c:119 in pocket_change
+Error in test 1: get_next_line(5: "variable_nls.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in pocket_change get_next_line.c:119:9
+     in get_next_line get_next_line.c:162:11
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:145:2
+
+=================================================================
+==28154==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60300000174f at pc 0x0001028697ce bp 0x7ffeed399e70 sp 0x7ffeed399e68
+READ of size 1 at 0x60300000174f thread T0
+    #0 0x1028697cd in pocket_change get_next_line.c:119
+    #1 0x102869ae1 in get_next_line get_next_line.c:162
+    #2 0x1028689a0 in test_gnl_func file_utils.c:40
+    #3 0x10285ff4b in main tester.c:162
+    #4 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+0x60300000174f is located 1 bytes to the left of 21-byte region [0x603000001750,0x603000001765)
+allocated by thread T0 here:
+    #0 0x10628c793 in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x61793)
+    #1 0x102862a2c in malloc malloc_mock.c:65
+    #2 0x10286914e in ft_strjoin get_next_line.c:40
+    #3 0x102869539 in line_join get_next_line.c:68
+    #4 0x102869a88 in get_next_line get_next_line.c:153
+    #5 0x1028689a0 in test_gnl_func file_utils.c:40
+    #6 0x10285ff4b in main tester.c:162
+    #7 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow get_next_line.c:119 in pocket_change
+Error in test 1: get_next_line(5: "lines_around_10.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in pocket_change get_next_line.c:119:9
+     in get_next_line get_next_line.c:162:11
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:162:2
+
+=================================================================
+==28157==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x62a00001e1ff at pc 0x0001028697ce bp 0x7ffeed399e70 sp 0x7ffeed399e68
+READ of size 1 at 0x62a00001e1ff thread T0
+    #0 0x1028697cd in pocket_change get_next_line.c:119
+    #1 0x102869ae1 in get_next_line get_next_line.c:162
+    #2 0x1028689a0 in test_gnl_func file_utils.c:40
+    #3 0x102860e4b in main tester.c:181
+    #4 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+0x62a00001e1ff is located 1 bytes to the left of 20011-byte region [0x62a00001e200,0x62a00002302b)
+allocated by thread T0 here:
+    #0 0x10628c793 in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x61793)
+    #1 0x102862a2c in malloc malloc_mock.c:65
+    #2 0x10286914e in ft_strjoin get_next_line.c:40
+    #3 0x102869539 in line_join get_next_line.c:68
+    #4 0x102869a88 in get_next_line get_next_line.c:153
+    #5 0x1028689a0 in test_gnl_func file_utils.c:40
+    #6 0x102860e4b in main tester.c:181
+    #7 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow get_next_line.c:119 in pocket_change
+Error in test 1: get_next_line(5: "giant_line_nl.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in pocket_change get_next_line.c:119:9
+     in get_next_line get_next_line.c:162:11
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:181:3
+
+=================================================================
+==28161==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60300000174f at pc 0x0001028697ce bp 0x7ffeed399e70 sp 0x7ffeed399e68
+READ of size 1 at 0x60300000174f thread T0
+    #0 0x1028697cd in pocket_change get_next_line.c:119
+    #1 0x102869ae1 in get_next_line get_next_line.c:162
+    #2 0x1028689a0 in test_gnl_func file_utils.c:40
+    #3 0x1028614f5 in main tester.c:193
+    #4 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+0x60300000174f is located 1 bytes to the left of 21-byte region [0x603000001750,0x603000001765)
+allocated by thread T0 here:
+    #0 0x10628c793 in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x61793)
+    #1 0x102862a2c in malloc malloc_mock.c:65
+    #2 0x10286914e in ft_strjoin get_next_line.c:40
+    #3 0x102869539 in line_join get_next_line.c:68
+    #4 0x102869a88 in get_next_line get_next_line.c:153
+    #5 0x1028689a0 in test_gnl_func file_utils.c:40
+    #6 0x1028614f5 in main tester.c:193
+    #7 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow get_next_line.c:119 in pocket_change
+Error in test 1: get_next_line(5: "read_error.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in pocket_change get_next_line.c:119:9
+     in get_next_line get_next_line.c:162:11
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:193:2
+
+=================================================================
+==28163==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000022f at pc 0x0001028697ce bp 0x7ffeed397510 sp 0x7ffeed397508
+READ of size 1 at 0x60200000022f thread T0
+    #0 0x1028697cd in pocket_change get_next_line.c:119
+    #1 0x102869ae1 in get_next_line get_next_line.c:162
+    #2 0x102868e07 in test_gnl_func_limits file_utils.c:73
+    #3 0x10285c7e1 in test_limit tester.c:84
+    #4 0x102861ed9 in main tester.c:235
+    #5 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+0x60200000022f is located 1 bytes to the left of 11-byte region [0x602000000230,0x60200000023b)
+allocated by thread T0 here:
+    #0 0x10628c793 in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x61793)
+    #1 0x102862a2c in malloc malloc_mock.c:65
+    #2 0x10286914e in ft_strjoin get_next_line.c:40
+    #3 0x102869539 in line_join get_next_line.c:68
+    #4 0x102869a88 in get_next_line get_next_line.c:153
+    #5 0x102868e07 in test_gnl_func_limits file_utils.c:73
+    #6 0x10285c7e1 in test_limit tester.c:84
+    #7 0x102861ed9 in main tester.c:235
+    #8 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow get_next_line.c:119 in pocket_change
+Error in test 4: get_next_line(5: "limits.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in pocket_change get_next_line.c:119:9
+     in get_next_line get_next_line.c:162:11
+     in test_gnl_func_limits file_utils.c:73:8
+     in test_limit tester.c:84:7
+     in main tester.c:235:3
+
+Error in test 1: get_next_line(0: "stdin"): expected: "0123456789\n", got: <NULL>
+Error in test 1: get_next_line(0: "stdin"): not enough memory allocated, needed: 12, reserved: 0
+Could not find the corresponding allocation or the pointer 0x0
+should reserve space for the string: "0123456789\n"
+Error in test 2: get_next_line(0: "stdin"): expected: "012345678\n", got: <NULL>
+Error in test 2: get_next_line(0: "stdin"): not enough memory allocated, needed: 11, reserved: 0
+Could not find the corresponding allocation or the pointer 0x0
+should reserve space for the string: "012345678\n"
+Error in test 3: get_next_line(0: "stdin"): expected: "90123456789\n", got: <NULL>
+Error in test 3: get_next_line(0: "stdin"): not enough memory allocated, needed: 13, reserved: 0
+Could not find the corresponding allocation or the pointer 0x0
+should reserve space for the string: "90123456789\n"
+Error in test 4: get_next_line(0: "stdin"): expected: "0123456789\n", got: <NULL>
+Error in test 4: get_next_line(0: "stdin"): not enough memory allocated, needed: 12, reserved: 0
+Could not find the corresponding allocation or the pointer 0x0
+should reserve space for the string: "0123456789\n"
+Error in test 5: get_next_line(0: "stdin"): expected: "xxxx\n", got: <NULL>
+Error in test 5: get_next_line(0: "stdin"): not enough memory allocated, needed: 6, reserved: 0
+Could not find the corresponding allocation or the pointer 0x0
+should reserve space for the string: "xxxx\n"
+Error in test 4: get_next_line(5: "Invalid fd"): 
+Memory leak: 0x602000000110 - 1 bytes
+You failed to free the memory allocated at:
+     in _add_malloc malloc_mock.c:29:8
+     in malloc malloc_mock.c:75:10
+  -> in ft_strjoin get_next_line.c:40:12
+     in line_join get_next_line.c:68:10
+     in get_next_line get_next_line.c:153:13
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:103:2
+
+Memory leak: 0x602000000130 - 1 bytes
+You failed to free the memory allocated at:
+     in _add_malloc malloc_mock.c:29:8
+     in malloc malloc_mock.c:75:10
+  -> in ft_strjoin get_next_line.c:40:12
+     in line_join get_next_line.c:68:10
+     in get_next_line get_next_line.c:153:13
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:103:2
+
+=================================================================
+==28181==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000010f at pc 0x000103e6c82e bp 0x7ffeebd96ef0 sp 0x7ffeebd96ee8
+READ of size 1 at 0x60200000010f thread T0
+    #0 0x103e6c82d in pocket_change get_next_line.c:119
+    #1 0x103e6cb41 in get_next_line get_next_line.c:162
+    #2 0x103e6ba00 in test_gnl_func file_utils.c:40
+    #3 0x103e61e15 in main tester.c:129
+    #4 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+0x60200000010f is located 1 bytes to the left of 2-byte region [0x602000000110,0x602000000112)
+allocated by thread T0 here:
+    #0 0x107481793 in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x61793)
+    #1 0x103e65a8c in malloc malloc_mock.c:65
+    #2 0x103e6c1ae in ft_strjoin get_next_line.c:40
+    #3 0x103e6c599 in line_join get_next_line.c:68
+    #4 0x103e6cae8 in get_next_line get_next_line.c:153
+    #5 0x103e6ba00 in test_gnl_func file_utils.c:40
+    #6 0x103e61e15 in main tester.c:129
+    #7 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow get_next_line.c:119 in pocket_change
+Error in test 1: get_next_line(5: "only_nl.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in pocket_change get_next_line.c:119:9
+     in get_next_line get_next_line.c:162:11
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:129:2
+
+=================================================================
+==28184==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000010f at pc 0x000103e6c82e bp 0x7ffeebd96ef0 sp 0x7ffeebd96ee8
+READ of size 1 at 0x60200000010f thread T0
+    #0 0x103e6c82d in pocket_change get_next_line.c:119
+    #1 0x103e6cb41 in get_next_line get_next_line.c:162
+    #2 0x103e6ba00 in test_gnl_func file_utils.c:40
+    #3 0x103e62440 in main tester.c:135
+    #4 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+0x60200000010f is located 1 bytes to the left of 6-byte region [0x602000000110,0x602000000116)
+allocated by thread T0 here:
+    #0 0x107481793 in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x61793)
+    #1 0x103e65a8c in malloc malloc_mock.c:65
+    #2 0x103e6c1ae in ft_strjoin get_next_line.c:40
+    #3 0x103e6c599 in line_join get_next_line.c:68
+    #4 0x103e6cae8 in get_next_line get_next_line.c:153
+    #5 0x103e6ba00 in test_gnl_func file_utils.c:40
+    #6 0x103e62440 in main tester.c:135
+    #7 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow get_next_line.c:119 in pocket_change
+Error in test 1: get_next_line(5: "multiple_nl.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in pocket_change get_next_line.c:119:9
+     in get_next_line get_next_line.c:162:11
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:135:2
+
+=================================================================
+==28186==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x61100000017f at pc 0x000103e6c82e bp 0x7ffeebd96ef0 sp 0x7ffeebd96ee8
+READ of size 1 at 0x61100000017f thread T0
+    #0 0x103e6c82d in pocket_change get_next_line.c:119
+    #1 0x103e6cb41 in get_next_line get_next_line.c:162
+    #2 0x103e6ba00 in test_gnl_func file_utils.c:40
+    #3 0x103e62ba7 in main tester.c:145
+    #4 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+0x61100000017f is located 1 bytes to the left of 223-byte region [0x611000000180,0x61100000025f)
+allocated by thread T0 here:
+    #0 0x107481793 in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x61793)
+    #1 0x103e65a8c in malloc malloc_mock.c:65
+    #2 0x103e6c1ae in ft_strjoin get_next_line.c:40
+    #3 0x103e6c599 in line_join get_next_line.c:68
+    #4 0x103e6cae8 in get_next_line get_next_line.c:153
+    #5 0x103e6ba00 in test_gnl_func file_utils.c:40
+    #6 0x103e62ba7 in main tester.c:145
+    #7 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow get_next_line.c:119 in pocket_change
+Error in test 1: get_next_line(5: "variable_nls.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in pocket_change get_next_line.c:119:9
+     in get_next_line get_next_line.c:162:11
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:145:2
+
+=================================================================
+==28188==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60600000049f at pc 0x000103e6c82e bp 0x7ffeebd96ef0 sp 0x7ffeebd96ee8
+READ of size 1 at 0x60600000049f thread T0
+    #0 0x103e6c82d in pocket_change get_next_line.c:119
+    #1 0x103e6cb41 in get_next_line get_next_line.c:162
+    #2 0x103e6ba00 in test_gnl_func file_utils.c:40
+    #3 0x103e63537 in main tester.c:162
+    #4 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+0x60600000049f is located 1 bytes to the left of 50-byte region [0x6060000004a0,0x6060000004d2)
+allocated by thread T0 here:
+    #0 0x107481793 in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x61793)
+    #1 0x103e65a8c in malloc malloc_mock.c:65
+    #2 0x103e6c1ae in ft_strjoin get_next_line.c:40
+    #3 0x103e6c599 in line_join get_next_line.c:68
+    #4 0x103e6cae8 in get_next_line get_next_line.c:153
+    #5 0x103e6ba00 in test_gnl_func file_utils.c:40
+    #6 0x103e63537 in main tester.c:162
+    #7 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow get_next_line.c:119 in pocket_change
+Error in test 1: get_next_line(5: "lines_around_10.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in pocket_change get_next_line.c:119:9
+     in get_next_line get_next_line.c:162:11
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:162:2
+
+=================================================================
+==28191==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x62a0000001ff at pc 0x000103e6c82e bp 0x7ffeebd96ef0 sp 0x7ffeebd96ee8
+READ of size 1 at 0x62a0000001ff thread T0
+    #0 0x103e6c82d in pocket_change get_next_line.c:119
+    #1 0x103e6cb41 in get_next_line get_next_line.c:162
+    #2 0x103e6ba00 in test_gnl_func file_utils.c:40
+    #3 0x103e64437 in main tester.c:181
+    #4 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+0x62a0000001ff is located 1 bytes to the left of 20017-byte region [0x62a000000200,0x62a000005031)
+allocated by thread T0 here:
+    #0 0x107481793 in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x61793)
+    #1 0x103e65a8c in malloc malloc_mock.c:65
+    #2 0x103e6c1ae in ft_strjoin get_next_line.c:40
+    #3 0x103e6c599 in line_join get_next_line.c:68
+    #4 0x103e6cae8 in get_next_line get_next_line.c:153
+    #5 0x103e6ba00 in test_gnl_func file_utils.c:40
+    #6 0x103e64437 in main tester.c:181
+    #7 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow get_next_line.c:119 in pocket_change
+Error in test 1: get_next_line(5: "giant_line_nl.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in pocket_change get_next_line.c:119:9
+     in get_next_line get_next_line.c:162:11
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:181:3
+
+=================================================================
+==28193==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60400000034f at pc 0x000103e6c82e bp 0x7ffeebd96ef0 sp 0x7ffeebd96ee8
+READ of size 1 at 0x60400000034f thread T0
+    #0 0x103e6c82d in pocket_change get_next_line.c:119
+    #1 0x103e6cb41 in get_next_line get_next_line.c:162
+    #2 0x103e6ba00 in test_gnl_func file_utils.c:40
+    #3 0x103e64ae1 in main tester.c:193
+    #4 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+0x60400000034f is located 1 bytes to the left of 45-byte region [0x604000000350,0x60400000037d)
+allocated by thread T0 here:
+    #0 0x107481793 in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x61793)
+    #1 0x103e65a8c in malloc malloc_mock.c:65
+    #2 0x103e6c1ae in ft_strjoin get_next_line.c:40
+    #3 0x103e6c599 in line_join get_next_line.c:68
+    #4 0x103e6cae8 in get_next_line get_next_line.c:153
+    #5 0x103e6ba00 in test_gnl_func file_utils.c:40
+    #6 0x103e64ae1 in main tester.c:193
+    #7 0x7fff6c8fecc8 in start (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow get_next_line.c:119 in pocket_change
+Error in test 1: get_next_line(5: "read_error.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in pocket_change get_next_line.c:119:9
+     in get_next_line get_next_line.c:162:11
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:193:2
+
+Error in test 1: get_next_line(0: "stdin"): expected: "0123456789\n", got: <NULL>
+Error in test 1: get_next_line(0: "stdin"): not enough memory allocated, needed: 12, reserved: 0
+Could not find the corresponding allocation or the pointer 0x0
+should reserve space for the string: "0123456789\n"
+Error in test 2: get_next_line(0: "stdin"): expected: "012345678\n", got: <NULL>
+Error in test 2: get_next_line(0: "stdin"): not enough memory allocated, needed: 11, reserved: 0
+Could not find the corresponding allocation or the pointer 0x0
+should reserve space for the string: "012345678\n"
+Error in test 3: get_next_line(0: "stdin"): expected: "90123456789\n", got: <NULL>
+Error in test 3: get_next_line(0: "stdin"): not enough memory allocated, needed: 13, reserved: 0
+Could not find the corresponding allocation or the pointer 0x0
+should reserve space for the string: "90123456789\n"
+Error in test 4: get_next_line(0: "stdin"): expected: "0123456789\n", got: <NULL>
+Error in test 4: get_next_line(0: "stdin"): not enough memory allocated, needed: 12, reserved: 0
+Could not find the corresponding allocation or the pointer 0x0
+should reserve space for the string: "0123456789\n"
+Error in test 5: get_next_line(0: "stdin"): expected: "xxxx\n", got: <NULL>
+Error in test 5: get_next_line(0: "stdin"): not enough memory allocated, needed: 6, reserved: 0
+Could not find the corresponding allocation or the pointer 0x0
+should reserve space for the string: "xxxx\n"
