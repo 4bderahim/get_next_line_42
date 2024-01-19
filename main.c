@@ -10,13 +10,7 @@ int main()
     //int d = 0;
    printf("=%s=\n", get_next_line(t));
    printf("=[%s]=\n", get_next_line(t));
-   printf("=[%s]=\n", get_next_line(t));
-
-   printf("=[%s]=\n", get_next_line(t));
-   printf("=[%s]=\n", get_next_line(t));
-   printf("=[%s]=\n", get_next_line(t));
-   printf("=[%s]=\n", get_next_line(t));
-   printf("=[%s]=\n", get_next_line(t));
+   printf("=[%s]=\n", get_next_lin
    //system("leaks -q a.out");
     close(t);
     //printf("[%d}[%s]",i ,buf);
