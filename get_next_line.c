@@ -59,20 +59,19 @@ char *line_join(char *pocket, int fd)
 	
 	while (cc != 0)
 	{
-        buf = (char *) calloc(1, BUFFER_SIZE+1);
+        buf = (char *) ft_calloc(1, BUFFER_SIZE+1);
        
 		cc = read(fd ,buf, BUFFER_SIZE);
-        //printf("\t{{%s|%d}}\n", buf, cc);
-         //printf("!!!!%s|%d|%s!!!!\n", buf,i , pocket);
-         //--------\/
+     
         if (cc == 0 && i == 0)
-            return (ft_strjoin("", "",0));
+            {
+				free(pocket);
+				free(buf);
+				return (NULL);
+			}
         
 		pocket = ft_strjoin(pocket, buf, 1);
-		//printf("[[+++%s+++]]\n", pocket);
-		
-		check = ft_strchr(pocket, '\n');//|| ft_strchr(buf, '\0') != NULL
-		//printf("[[%s||%s||%s||%d]]\n", check, buf, pocket, cc);
+		check = ft_strchr(pocket, '\n');
 		if (check)
 		{
 			free(buf);
@@ -81,6 +80,7 @@ char *line_join(char *pocket, int fd)
 		if (cc == -1)
 			{
 				free(buf);
+				free(pocket);
 				return (NULL);
 			}
         i++;
@@ -100,7 +100,7 @@ char *souvernire(char *pocket,char *rest)
 	i = 0;
 	if (pocket == NULL)
 		return (NULL);
-	if(rest[1] == '\0' || pocket[0] == '\0')
+	if(pocket[0] == '\0')
 		{
             return (pocket);
 			// free(pocket);
@@ -147,41 +147,24 @@ char *get_next_line(int fd)
 	static char *pocket;
 	char *new_line_check;
 	char *buffer;
-
-	if (fd <= 0 || fd == 1 || fd == 2 || fd > 65535)
+	if (fd <= 0 || fd == 1 || fd == 2 || fd > OPEN_MAX)
 		{
-           // free(pocket);
-            //pocket = NULL;
+			if (pocket)
+				free(pocket);
+            pocket = NULL;
             return(NULL);
         }
-	// if (pocket != NULL)
-    // {
-    //   //  printf("@@%s@@\n", pocket);
-        
-    //     if (pocket[0] == '\0')
-    //     {
-    //         pocket = NULL;
-    //         free(pocket);
-    //         return (ft_strjoin("", "", 1));
-    //     }
-    // }
+	print
     pocket  = line_join(pocket, fd);
-   // printf("\t=%s=\n", pocket);
 	if (pocket == NULL)
-		return (NULL);
-   // printf("\t\t\t((%s}\n", pocket);
+			return (NULL);
 	new_line_check = ft_strchr(pocket, '\n');
 	if (new_line_check)
 		{
-            
 			buffer = pocket_change(pocket, new_line_check);
-            
-			// buffer = ft_strjoin(buffer, "", 1);
-			//printf("\t\t\t\t\t\t\t[%s]\n", buffer);
 		}
 	else{
 		buffer = ft_strjoin(pocket, "", 1);
-       // printf("\t\t\t{%s}\n", buffer);
 		pocket = NULL;
 		return buffer;
 	}

@@ -3,7 +3,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
-
+#include <limits.h>
 
 #ifndef BUFFER_SIZE
 #define BUFFER_SIZE 12
