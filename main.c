@@ -11,8 +11,8 @@ int main()
     char *s1 = get_next_line(t);
     char *s2 = get_next_line(t);
      char *s3 = get_next_line(t);
-     char *s4 = get_next_line(t);
-     char *s5 = get_next_line(t);
+      char *s4 = get_next_line(t);
+      char *s5 = get_next_line(t);
     printf("%s", s1);
     printf("%s", s2);
     printf("%s", s3);

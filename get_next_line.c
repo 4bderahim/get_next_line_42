@@ -63,7 +63,7 @@ char *line_join(char *pocket, int fd)
        
 		cc = read(fd ,buf, BUFFER_SIZE);
      
-        if (cc == 0 && i == 0)
+        if (cc == 0 && i == 0 && (!pocket || !pocket[0]))
             {
 				free(pocket);
 				free(buf);
@@ -116,14 +116,29 @@ char *pocket_change(char *pocket, char *reserve)
 {
 	char *buf;
 	int i;
-
+	int j;
+	(void)reserve;
+	
+	
+	//x = (((unsigned long) reserve)-((unsigned long) pocket))+1;
+	//printf("\n\n\t =%d\n\n\n", x);
 	i = 0;
-	buf = ft_calloc((((long) reserve)-((long) pocket))+1, 1);
-
-	while (pocket[i-1] != '\n')
-	{
-		buf[i] = pocket[i];
+	
+	while(pocket[i] != '\n')
 		i++;
+	i++;
+	//printf("#%c[%d]#\n",pocket[i], i);
+	//printf("\t\t\t{{%s||%d ||}}\n", pocket, i);
+	//i++;
+	//printf("\t%d\n", i);
+	buf = ft_calloc((i+1), 1);
+	
+
+	j = 0;
+	while (j < i)
+	{
+		buf[j] = pocket[j];
+		j++;
 	}
 	return (buf);
 }
@@ -133,7 +148,7 @@ char *first_line(char *rest)
 
 	int i;
 	i = 1;
-	buf = (char *) calloc(strlen(rest), 1);
+	buf = ft_calloc(strlen(rest), 1);
 	while(rest[i])
 	{
 		*buf = rest[i];
@@ -147,34 +162,38 @@ char *get_next_line(int fd)
 	static char *pocket;
 	char *new_line_check;
 	char *buffer;
-	if (fd <= 0 || fd == 1 || fd == 2 || fd > OPEN_MAX)
+
+	//printf("##||%s##\n\n\n", pocket);
+	if (fd < 0 ||fd > OPEN_MAX)
 		{
 			if (pocket)
 				free(pocket);
             pocket = NULL;
             return(NULL);
         }
-	print
+	
     pocket  = line_join(pocket, fd);
+	
 	if (pocket == NULL)
 			return (NULL);
+	
 	new_line_check = ft_strchr(pocket, '\n');
 	if (new_line_check)
 		{
-			buffer = pocket_change(pocket, new_line_check);
+			buffer = pocket_change(pocket, new_line_check);	
+			
 		}
 	else{
+	
 		buffer = ft_strjoin(pocket, "", 1);
 		pocket = NULL;
 		return buffer;
 	}
 	pocket = souvernire(pocket, new_line_check);
 	
+	
 	return (buffer);
 }
-
-
-
 
 
 
