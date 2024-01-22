@@ -1,4 +1,3 @@
-
 #include "get_next_line.h"
 
 static void	join_the_two_strings(char *all, char const *s1, char const *s2)
@@ -40,6 +39,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	join_the_two_strings(allocated, s1, s2);
 	allocated[string_len] = '\0';
+	
 	free(s1);
 	return (allocated);
 }
@@ -73,7 +73,6 @@ char *line_join(char *pocket, int fd)
 char *souvernire(char *pocket,char *rest)
 {
 	char *buf;
-
 	int i;
 	int j;
 
@@ -83,7 +82,9 @@ char *souvernire(char *pocket,char *rest)
 		return (NULL);
 	if(pocket[0] == '\0')
             return (pocket);
+	
 	buf = ft_strjoin(NULL, rest+1);
+	
 	free(pocket);
 	return (buf);
 }
@@ -124,36 +125,29 @@ char *first_line(char *rest)
 
 char *get_next_line(int fd)
 {
-	static char *pocket;
+	static char *pocket[OPEN_MAX];
 	char *new_line_check;
 	char *buffer;
 
-	if (fd < 0 ||fd > OPEN_MAX)
+	if (fd < 0 || fd > OPEN_MAX)
 		{
-			if (pocket)
-				free(pocket);
-            pocket = NULL;
+			free(pocket[fd]);
+            pocket[fd] = NULL;
             return(NULL);
         }
-    pocket  = line_join(pocket, fd);
-	if (pocket == NULL)
+    pocket[fd]  = line_join(pocket[fd], fd);
+	if (pocket[fd] == NULL)
 			return (NULL);
-	new_line_check = ft_strchr(pocket, '\n');
+	new_line_check = ft_strchr(pocket[fd], '\n');
 	if (new_line_check)
-		buffer = pocket_change(pocket);
+		buffer = pocket_change(pocket[fd]);
 	else{
-		buffer = ft_strjoin(pocket, "");
-		pocket = NULL;
+		buffer = ft_strjoin(pocket[fd], "");
+		pocket[fd] = NULL;
 		return buffer;
 	}
-	pocket = souvernire(pocket, new_line_check);
+	pocket[fd] = souvernire(pocket[fd], new_line_check);
 	return (buffer);
 }
-
-
-
-
-
-
 
 

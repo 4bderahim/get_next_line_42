@@ -18,6 +18,7 @@ int main()
     printf("%s", s3);
     printf("%s", s4);
     printf("%s", s5);
+   
 //    printf("=%s=\n", get_next_line(t));
 //    printf("=%s=\n", get_next_line(t));
 //    printf("=%s=\n", get_next_line(t));
