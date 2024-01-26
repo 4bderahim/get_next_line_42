@@ -18,10 +18,11 @@ int	main(void)
 	s1 = get_next_line(t);
 	s2 = get_next_line(y);
 	s3 = get_next_line(t);
+	s4 = get_next_line(y);
     //s4 = get_next_line(455645555);
 	// s5 = get_next_line(t);
 	printf("%s", s1);
-	printf("%s", s2);
+	printf("[%s]", s2);
 	printf("%s", s3);
     printf("%s", s4);
 	// printf("%s", s5);
@@ -36,5 +37,6 @@ int	main(void)
 	//    printf("=%s=\n", get_next_line(t));
 	system("leaks -q a.out");
 	close(t);
+	close(y);
 	// printf("[%d}[%s]",i ,buf);
 }

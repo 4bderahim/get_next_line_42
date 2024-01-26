@@ -53,7 +53,7 @@ char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*allocated;
 	size_t	string_len;
-	int		x;
+	size_t	x;
 
 	x = 0;
 	if (s1 != NULL)
@@ -63,7 +63,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	string_len = x + ft_strlen(s2);
 	allocated = (char *)malloc(string_len + 1);
 	if (!allocated)
+	{
 		return (NULL);
+	}
 	join_the_two_strings(allocated, s1, s2);
 	allocated[string_len] = '\0';
 	free(s1);

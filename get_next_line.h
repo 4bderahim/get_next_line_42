@@ -5,19 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-krid <ael-krid@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 17:30:53 by ael-krid          #+#    #+#             */
-/*   Updated: 2024/01/22 17:30:54 by ael-krid         ###   ########.fr       */
+/*   Created: 2024/01/23 18:39:29 by ael-krid          #+#    #+#             */
+/*   Updated: 2024/01/23 18:39:30 by ael-krid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE
-# define GET_NEXT_LINE
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 12
+#  define BUFFER_SIZE 42
 # endif
 
-# include <stdlib.h>
+
 # include <unistd.h>
 
 char	*get_next_line(int fd);

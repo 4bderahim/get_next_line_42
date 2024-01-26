@@ -39,7 +39,7 @@ char	*line_join(char *pocket, int fd)
 	return (pocket);
 }
 
-char	*souvernire(char *pocket, char *rest)
+char	*souv(char *pocket, char *rest)
 {
 	char	*buf;
 	int		i;
@@ -56,7 +56,7 @@ char	*souvernire(char *pocket, char *rest)
 	return (buf);
 }
 
-char	*pocket_change(char *pocket)
+static char	*pocket_change(char *pocket)
 {
 	char	*buf;
 	int		i;
@@ -100,9 +100,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
-		//if (pocket)
 		free(pocket);
-		//pocket = NULL;
 		return (NULL);
 	}
 	pocket = line_join(pocket, fd);
@@ -117,6 +115,6 @@ char	*get_next_line(int fd)
 		pocket = NULL;
 		return (buffer);
 	}
-	pocket = souvernire(pocket, new_line_check);
+	pocket = souv(pocket, new_line_check);
 	return (buffer);
 }

@@ -5,20 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-krid <ael-krid@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 17:30:34 by ael-krid          #+#    #+#             */
-/*   Updated: 2024/01/22 17:30:44 by ael-krid         ###   ########.fr       */
+/*   Created: 2024/01/23 18:37:25 by ael-krid          #+#    #+#             */
+/*   Updated: 2024/01/23 18:37:27 by ael-krid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUFFER_SIZE
- # define BUFFER_SIZE 12
- #endif
-#ifndef GET_NEXT_LINE
-# define GET_NEXT_LINE
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 # include <limits.h>
 # include <stdlib.h>
-#include <unistd.h>
+# include <unistd.h>
+
 char	*get_next_line(int fd);
 size_t	ft_strlen(char *s);
 char	*ft_bzero(char *s, size_t n);
