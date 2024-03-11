@@ -1,12 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-typedef struct push_list{
-    struct push_list *next;
-    struct push_list *prev;
-    int val;
-    int index;
-} p_list;
+#include "push_swap.h"
+
 p_list *p_new(int val)
 {
     p_list *new;
@@ -40,17 +36,16 @@ void p_addback(p_list **head, p_list *new)
             return ;
         }
     tmp->next = new;
+    new->prev = tmp;
 }
 long int p_atoi(char *s)
 {
-    //int t;
     int i;
     int sign = 1;
     long res;
     
     res = 0;
     i = 0;
-
     // while(s[i] == '\t' || s[i] == '\v'|| s[i] == '\f' || s[i] == '\r' || s[i] == ' ')
     //     i++;
     if (s[i] == '+' || s[i] == '-')
@@ -82,7 +77,7 @@ void p_free(p_list *list)
 	}
 	list = NULL;
 }
- int check_args(char *s)
+ int check_args(char *s, p_list *prev_node)
  {
     int i;
     long int num;
@@ -98,41 +93,47 @@ void p_free(p_list *list)
     num = p_atoi(s);
     if (num > 2147483647 || num < -2147483648)
         return 0;
-    return 1337;
+    if (prev_node != NULL)
+        if (num > prev_node->val)
+            return (1);
+    return 13;
 }
 
 int main(int argc, char **argv)
 {
     p_list *main_a;
     int ii  = 1;
+    int next_mv;
+
     main_a = NULL;
-    
     if (argc > 1)
      {
         while (ii < argc)
             {
-                if (!check_args(argv[ii]))
+                next_mv = check_args(argv[ii], p_last(main_a));
+                if (!next_mv)
                     {
-                        p_free(main_a);
                         write(1, "Error!", 6);
                         return 0;
                     }
                 p_addback(&main_a, p_new(p_atoi(argv[ii])));
                 ii++;
             }
+            if (next_mv == 1)
+                return 0;
      }
     p_list *p, *s, *cu;
-    p = p_new(56);
-    p_addback(&p, p_new(12));
+    //p = p_new(56);
+    //p_addback(&p, p_new(12));
     int i = 0;
     cu = main_a;
-    while (i < 2)
+    sa(p_last(main_a)->prev);
+    while (cu != NULL)
     {
         printf("{%d\n", cu->val);
         cu = cu->next;
         i++;
     }
-    system("leaks -q a.out");
     //p_free(p);
     //printf("%d", p->val);
 }
