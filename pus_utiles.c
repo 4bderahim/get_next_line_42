@@ -98,14 +98,31 @@ void p_free(p_list *list)
             return (1);
     return 13;
 }
+void list_mirror(p_list *a, p_list *b)
+{
+    p_list *tp;
+    p_list *tp_b;
 
+    tp = a;
+    tp_b = b;
+    while (tp != NULL)
+    {
+        p_addback(&tp_b, p_new(tp->val));
+        printf("@");
+        printf("[%d | \n\n", tp_b->val);
+        tp_b = tp_b->next;
+        tp = tp->next;
+    }
+}
 int main(int argc, char **argv)
 {
     p_list *main_a;
+    p_list *main_b;
     int ii  = 1;
     int next_mv;
 
     main_a = NULL;
+    main_b = NULL;
     if (argc > 1)
      {
         while (ii < argc)
@@ -114,26 +131,36 @@ int main(int argc, char **argv)
                 if (!next_mv)
                     {
                         write(1, "Error!", 6);
+                        
                         return 0;
                     }
                 p_addback(&main_a, p_new(p_atoi(argv[ii])));
+                p_addback(&main_b, p_new(p_atoi(argv[ii])));
                 ii++;
             }
             if (next_mv == 1)
-                return 0;
+                {
+                    system("leaks -q a.out");
+                    return 0;
+                }
      }
     p_list *p, *s, *cu;
-    //p = p_new(56);
-    //p_addback(&p, p_new(12));
     int i = 0;
+    
+    
+    rra(&main_a);
+    //main_b = ra(main_b);
+    //pb(&main_a, &main_b);
+    p = main_b;
     cu = main_a;
-    sa(p_last(main_a)->prev);
+   // printf("\t\n\n\n[[%d||||%d]]]]\n\n\n\n", p_len(main_a), p_len(main_b));
     while (cu != NULL)
     {
-        printf("{%d\n", cu->val);
+
+        printf("{%d||%d}\n",  cu->val, p->val);
+        p = p->next;        
         cu = cu->next;
         i++;
     }
-    //p_free(p);
-    //printf("%d", p->val);
+    system("leaks -q a.out");
 }
