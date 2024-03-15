@@ -108,11 +108,77 @@ void list_mirror(p_list *a, p_list *b)
     while (tp != NULL)
     {
         p_addback(&tp_b, p_new(tp->val));
-        printf("@");
-        printf("[%d | \n\n", tp_b->val);
         tp_b = tp_b->next;
         tp = tp->next;
     }
+}
+void handle_three(p_list **main_a)
+{
+    p_list *a;
+
+    a = *main_a;
+    if (a->val > a->next->next->val && a->next->val > a->val)
+        ra(&a);
+    if (a->val < a->next->next->val && a->next->next->val < a->next->val)
+    {
+        sa(a);
+        ra(&a);
+    }
+    if (a->val > a->next->val && a->val < a->next->next->val)
+        sa(a);
+    if (a->next->val < a->next->next->val && a->next->next->val < a->val)        
+        ra(&a);
+    if (a->val > a->next->val && a->next->val > a->next->next->val)
+        {
+            sa(a);
+            rra(&a);
+        }
+    *main_a = a;
+}
+void sort_five(p_list **a , p_list **b, int count)
+{
+    p_list *tmp_a;
+    p_list *tmp_b;
+
+    
+    pb(a, b);
+    
+    if (count == 5)
+        {
+            pb(a, b);
+        }
+    
+    handle_three(a);
+    
+    tmp_a = *a;
+    tmp_b = *b;
+
+    
+    if (tmp_b->val < tmp_a->val)
+        {
+            printf("\n\n[%d]\n\n", (tmp_b)->val);
+            pa(&tmp_a, &tmp_b);
+        }
+    else if (tmp_b->val > tmp_a->val && tmp_b->val < tmp_a->next->val)
+    {
+        pa(&tmp_a, &tmp_b);
+        sa(tmp_a);
+    }
+    else if (tmp_b->val > p_last(tmp_a)->val)
+    {
+        pa(&tmp_a, &tmp_b);
+        ra(&tmp_a);
+    }
+    else
+    {
+        pa(&tmp_a, &tmp_b);
+        rra(&tmp_a);
+        sa(tmp_a);
+        ra(&tmp_a);
+        ra(&tmp_a);
+    }
+    *a = tmp_a;
+    *b = tmp_b;
 }
 int main(int argc, char **argv)
 {
@@ -120,7 +186,6 @@ int main(int argc, char **argv)
     p_list *main_b;
     int ii  = 1;
     int next_mv;
-
     main_a = NULL;
     main_b = NULL;
     if (argc > 1)
@@ -135,32 +200,33 @@ int main(int argc, char **argv)
                         return 0;
                     }
                 p_addback(&main_a, p_new(p_atoi(argv[ii])));
-                p_addback(&main_b, p_new(p_atoi(argv[ii])));
                 ii++;
             }
-            if (next_mv == 1)
-                {
-                    system("leaks -q a.out");
-                    return 0;
-                }
+            if (argc == 4 )
+                handle_three(&main_a);
+            else if (argc > 4 && argc << 7)
+                sort_five(&main_a, &main_b, argc-1);
      }
     p_list *p, *s, *cu;
     int i = 0;
     
-    
-    rra(&main_a);
-    //main_b = ra(main_b);
-    //pb(&main_a, &main_b);
     p = main_b;
     cu = main_a;
-   // printf("\t\n\n\n[[%d||||%d]]]]\n\n\n\n", p_len(main_a), p_len(main_b));
+   // printf("\n\n|%d\n\n", main_b->val);
     while (cu != NULL)
     {
-
-        printf("{%d||%d}\n",  cu->val, p->val);
-        p = p->next;        
+        printf("\t|\t%d\n",   cu->val);
         cu = cu->next;
+       // p = p->next;
         i++;
     }
-    system("leaks -q a.out");
 }
+
+
+// if (next_mv == 1 && ii == argc)
+            //     {
+            //         system("leaks -q a.out");
+            //         return 0;
+            //     }
+
+

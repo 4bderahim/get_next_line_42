@@ -26,6 +26,7 @@ void sa(p_list *list_a)
     list_a->index = tmp;
     write(1, "sa", 2);
 }
+
 void sb(p_list *list_b)
 {
     int tmp;
@@ -74,10 +75,31 @@ void rrb(p_list **b_list)
     last->next->prev = last;
     *b_list = last;
 }
-// p_list *rrr(p_list **b)
-// {
+void rrr(p_list **b_list,p_list **a_list)
+{
+    p_list *last_b;
+    p_list *last_a;
+    p_list *a;
+    p_list *b;
 
-// }
+    if (b == NULL || b == NULL)
+        return ;
+    b = *b_list;
+    a = *a_list;
+    last_a = p_last(a);
+    last_a->next = a;
+    last_a->prev->next = NULL;
+    last_a->prev = NULL;
+    last_a->next->prev = last_a;
+    *a_list = last_a;
+    last_b = p_last(b);
+    last_b->next = b;
+    last_b->prev->next = NULL;
+    last_b->prev = NULL;
+    last_b->next->prev = last_b;
+    *b_list = last_b;
+
+}
 void pa(p_list **list_a, p_list **list_b)
 {
     p_list *tmp_a;
@@ -87,12 +109,24 @@ void pa(p_list **list_a, p_list **list_b)
     // if list_a is NULL; !!!!
     tmp_a = *list_a;
     tmp_b =  *list_b;
-    tmp_b = tmp_b->next;
-    tmp_b->prev->next = tmp_a;
-    tmp_a->prev = tmp_b->prev;
-    tmp_b->prev = NULL;
-    tmp_a = tmp_a->prev;
-    tmp_a->prev = NULL;
+    
+    if (tmp_b->next != NULL)
+    {
+        tmp_b = tmp_b->next;
+        tmp_b->prev->next = tmp_a;
+        tmp_a->prev = tmp_b->prev;
+        tmp_b->prev = NULL;
+        tmp_a = tmp_a->prev;
+        tmp_a->prev = NULL;
+    }
+    else
+    {
+        tmp_a->prev = tmp_b;
+        tmp_b->next = tmp_a;
+        tmp_a = tmp_a->prev;
+        tmp_a->prev = NULL;
+        tmp_b = NULL;
+    }
     *list_a = tmp_a;
     *list_b = tmp_b;
 }
@@ -102,15 +136,83 @@ void pb(p_list **list_a, p_list **list_b)
     p_list *tmp_b;
     if (*list_a == NULL)
         return ;
-    
     tmp_a = *list_a;
     tmp_b =  *list_b;
-    tmp_a = tmp_a->next;
-    tmp_a->prev->next = tmp_b;
-    tmp_b->prev = tmp_a->prev;
-    tmp_a->prev = NULL;
-    tmp_b = tmp_b->prev;
-    tmp_b->prev = NULL;
+    if (tmp_b == NULL)
+    {
+        //tmp_p = *list;
+        tmp_b = tmp_a;
+        tmp_a = tmp_a->next;
+        tmp_a->prev = NULL;
+        tmp_b->next = NULL;
+        tmp_b->prev = NULL;
+    }
+    else{
+        tmp_a = tmp_a->next;
+        tmp_a->prev->next = tmp_b;
+        tmp_b->prev = tmp_a->prev;
+        tmp_a->prev = NULL;
+        tmp_b = tmp_b->prev;
+        tmp_b->prev = NULL;
+    }
     *list_a = tmp_a;
     *list_b = tmp_b;
 }
+void ra(p_list **a)
+{
+    p_list *lst_a;
+    p_list *last;
+    lst_a = *a;
+    last = p_last(lst_a);
+    last->next = lst_a;
+    lst_a = lst_a->next;
+    lst_a->prev = NULL;
+    last->next->next = NULL;
+    last->next->prev = last;
+    *a = lst_a;
+}
+void rb(p_list **b)
+{
+    p_list *lst_b;
+    p_list *last;
+
+    if (*b == NULL)
+        return ;
+    lst_b = *b;
+    last = p_last(lst_b);
+    last->next = lst_b;
+    lst_b = lst_b->next;
+    lst_b->prev = NULL;
+    last->next->next = NULL;
+    last->next->prev = last;
+    *b = lst_b;
+}
+void rr(p_list **b, p_list **a)
+{
+    p_list *lst_b;
+    p_list *last;
+    p_list *lst_a;
+    
+
+    if (*b == NULL || *a == NULL)
+        return ;
+    lst_a = *a;
+    last = p_last(lst_a);
+    last->next = lst_a;
+    lst_a = lst_a->next;
+    lst_a->prev = NULL;
+    last->next->next = NULL;
+    last->next->prev = last;
+    *a = lst_a;
+
+    lst_b = *b;
+    last = p_last(lst_b);
+    last->next = lst_b;
+    lst_b = lst_b->next;
+    lst_b->prev = NULL;
+    last->next->next = NULL;
+    last->next->prev = last;
+    *b = lst_b;
+}
+
+
