@@ -5,12 +5,15 @@
 #ifndef PUSH
 #define PUSH
 
+
 typedef struct push_list{
     struct push_list *next;
     struct push_list *prev;
     int val;
     int index;
+    int range_id;
 } p_list;
+void push_swap_sorting(p_list **stack_a, p_list **stack_b);
 void sort_five(p_list **a , p_list **b, int count);
 int p_len(p_list *list);
 void pa(p_list **list_a, p_list **list_b);
@@ -27,4 +30,8 @@ void rr(p_list **b, p_list **a);
 p_list *p_new(int val);
 
 p_list *p_last(p_list *node);
+
+void p_addback(p_list **head, p_list *new);
+void p_free(p_list *list);
+
 #endif

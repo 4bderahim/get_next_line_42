@@ -130,6 +130,7 @@ void pa(p_list **list_a, p_list **list_b)
     *list_a = tmp_a;
     *list_b = tmp_b;
 }
+
 void pb(p_list **list_a, p_list **list_b)
 {
     p_list *tmp_a;
@@ -158,6 +159,8 @@ void pb(p_list **list_a, p_list **list_b)
     *list_a = tmp_a;
     *list_b = tmp_b;
 }
+
+
 void ra(p_list **a)
 {
     p_list *lst_a;
@@ -187,6 +190,8 @@ void rb(p_list **b)
     last->next->prev = last;
     *b = lst_b;
 }
+
+
 void rr(p_list **b, p_list **a)
 {
     p_list *lst_b;
