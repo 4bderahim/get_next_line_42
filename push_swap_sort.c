@@ -77,38 +77,46 @@ void normal_sort(p_list **list)
     
     list_count = (p_last(*list_to_range)->index) +1;
     tmp = *list_to_range;
-    m = list_count / ranges_count ;
     i = 1;
     // if (list_count % ranges_count != 0)
-    //     ranges_count -= 1;
-    p_list *pp;
-    pp = *list_to_range;
+    //     {
+    //         ranges_count -= 1;
+    //     }
+    m = list_count / ranges_count ;
 
-    while (pp != NULL)
+    while (tmp != NULL)
     {
-        printf("val=%d index=%d  \n",pp->val, pp->index);
-        pp = pp->next;
-    }
-    while (i <= ranges_count )
-    {
-        //-----\}
-        printf(" here !!!!   ++%d \n", i);
         tmp->range_id = i;
-         if (m == tmp->index)
-            i++;
-        tmp = tmp->next;
-    }
-    
-    m = list_count % ranges_count ;
-    if (m != 0)
+        
+        if (tmp->index+1 == m)
         {
-            while (tmp != NULL)
+            if (m < (list_count / ranges_count) * ranges_count)
                 {
-                    tmp->range_id = ranges_count+1;
-                    tmp = tmp->next;
+                    printf("%d\t%d||%d\n", i, m, p_last(tmp)->index);
+                    m += list_count / ranges_count;
+                    i++;
                 }
         }
-    
+        tmp = tmp->next;
+    }
+    p_list *pp;
+
+    pp = *list_to_range;
+    printf("\n\n\n");
+    while (pp != NULL)
+    {
+        printf("\tindex=%d  val=%d  id=%d\n",pp->index,pp->val, pp->range_id);
+        pp = pp->next;
+    }
+    m = list_count % ranges_count ;
+    // if (m != 0)
+    //     {
+    //         while (tmp != NULL)
+    //             {
+    //                 tmp->range_id = ranges_count+1;
+    //                 tmp = tmp->next;
+    //             }
+    //     }
  }
 void push_swap_sorting(p_list **stack_a, p_list **stack_b)
 {
@@ -117,9 +125,7 @@ void push_swap_sorting(p_list **stack_a, p_list **stack_b)
     list_mirror(*stack_a, &range_array);
     normal_sort(&range_array);
     index_stack_a(*stack_a);
-    if (p_last(range_array)->index < 99)
-        list_ranger(&range_array, 4);
+    if (p_last(range_array)->index <= 99)
+        list_ranger(&range_array, 5);
 
-
-    
 }

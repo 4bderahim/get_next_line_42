@@ -5,7 +5,6 @@
 #ifndef PUSH
 #define PUSH
 
-
 typedef struct push_list{
     struct push_list *next;
     struct push_list *prev;
