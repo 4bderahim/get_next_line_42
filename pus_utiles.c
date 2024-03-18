@@ -228,7 +228,6 @@ int main(int argc, char **argv)
                 sort_five(&main_a, &main_b, argc-1);
             else
                 {
-                    printf(")))");
                     push_swap_sorting(&main_a, &main_b);
                 }
      }
