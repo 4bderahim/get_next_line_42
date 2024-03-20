@@ -5,7 +5,7 @@
 #ifndef PUSH
 #define PUSH
 
-typedef struct push_list{
+typedef struct push_list{   
     struct push_list *next;
     struct push_list *prev;
     int val;
@@ -29,8 +29,8 @@ void rr(p_list **b, p_list **a);
 p_list *p_new(int val);
 
 p_list *p_last(p_list *node);
-
 void p_addback(p_list **head, p_list *new);
 void p_free(p_list *list);
-
 #endif
+
+

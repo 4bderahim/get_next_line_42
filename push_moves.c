@@ -3,7 +3,7 @@
 int p_len(p_list *list)
 {
     int count;
-    count = 0;
+    count = 1;
 
     while (list != NULL)
     {
@@ -137,6 +137,7 @@ void pb(p_list **list_a, p_list **list_b)
     p_list *tmp_b;
     if (*list_a == NULL)
         return ;
+    
     tmp_a = *list_a;
     tmp_b =  *list_b;
     if (tmp_b == NULL)
@@ -150,6 +151,8 @@ void pb(p_list **list_a, p_list **list_b)
     }
     else{
         tmp_a = tmp_a->next;
+        if (tmp_a == NULL)
+            printf("\t\t@####");
         tmp_a->prev->next = tmp_b;
         tmp_b->prev = tmp_a->prev;
         tmp_a->prev = NULL;

@@ -117,99 +117,85 @@ p_list *get_range_start(p_list *r, int id)
     }
     return (tmp_ranged);
 }
-int check_range_id_in_stack_a(p_list *a, int id, p_list *ranged)
+int check_range_id_in_stack_a(p_list *a, p_list *ranged, int id, char *top_bottom)
 {
     p_list *tmp;
-    p_list *tmp_range;
+    p_list *tmp_ranged;
 
-    tmp_range = get_range_start(ranged, id);
+    tmp_ranged = get_range_start(ranged, id);
     tmp = a;
-    
-    while (tmp != NULL)
+    if (top_bottom == "b")
+        tmp = p_last(tmp);
+    while (tmp_ranged->range_id == id)
     {
-        while (tmp_range != NULL)
+        while (tmp != NULL)
         {
-            if (tmp->index == tmp_range->index)
-                return (1);
-            tmp_range = tmp_range->next;
+            if (tmp->index == id)
+                return (tmp->index);
+            if (top_bottom == 'b')
+                tmp = tmp->prev;
+            else
+                tmp = tmp->next;
         }
-        tmp = tmp->next;
-        tmp_range = get_range_start(ranged, id);
+        tmp = a;
+        tmp_ranged = tmp_ranged->next; 
     }
     return (-1);
 }
-int is_from_range(int index,int range_id,  p_list *ranged_list)
-{
-    p_list *tmp;
 
-
-    tmp = get_range_start(ranged_list, range_id);
-    while (tmp != NULL && tmp->range_id != range_id)
-    {
-        if (tmp->index == index)
-            {
-                return(1);
-            }
-        tmp = tmp->next;
-    }
-    return (0);
-}
-void push_range_to_b(p_list **stack_a, p_list **stack_b, p_list *ranged_list)
+int check_first_to_pb(p_list *a, int f_index, int s_index, int max_index)
 {
-    p_list *a;
-    p_list *b;
-    int range_id;
-    range_id = 1;
-    a = *stack_a;
-    b = *stack_b;
-     p_list *pp;
-     pp = *stack_a;
-    while (a != NULL)
+    int middle_of_stack;
+    int f_moves_count;
+    int s_moves_count;
+
+    middle_of_stack = max_index / 2;
+    if (f_index <= middle_of_stack && s_index <= middle_of_stack)
     {
-        if (check_range_id_in_stack_a(a, range_id, ranged_list) == -1)
-            {
-                range_id++;
-            }
-        if (is_from_range(a->index, range_id, ranged_list))
-        {
-            printf("\t%d\n", a->val);
-            pb(&a, &b);
-            if (b->next != NULL)
-                {
-                    if (b->val < b->next->val)
-                        rb(&b);
-                }
-        }
-        else
-            ra(&a);
         
-
-        while (pp != NULL)
-        {
-            printf("val=%d | index=%d range_id=%d\n", pp->val, pp->index, pp->range_id);
-            pp = pp->next;
-        }
-        a = a->next;
-        //*stack_b = b;
+        
     }
-   
-    //*stack_b = b;
-    
-    
 
-
-
+    if (f_index < middle_of_stack)
+        {
+            tmp_int = f_index;
+            while (tmp_int >= 0)        
+            {
+                ra(&a);
+                tmp_int--;
+            }
+        }
+    else    
+        {
+            tmp_int = (max_index - s_index) +1;
+            while (tmp_int >= 0 )
+            {
+                rra(&a);
+                tmp_int--;
+            }
+        }
 }
+void push_to_stack_b(p_list **stack_a, p_list **stack_b , p_list **ranged_list)
+{
+    p_list *ranged;
+    int id;
+    p_list *tmp_stack_a;
+    tmp_stack_a = *stack_a;
 
+    id = 0;
+    ranged = *stack_a;
+    while (tmp_stack_a != NULL)
+    {
+        if (check_range_id_in_stack_a(tmp_stack_a, ranged, id, "b") == -1)
+            id++;
+        else
+        {
+
+        }
+    }
+}
 void push_swap_sorting(p_list **stack_a, p_list **stack_b)
 {
-    
-    p_list *a;
-    p_list *p;
-
-    a = *stack_a;
-    p = *stack_a;
-   
     p_list *range_array;
     range_array = NULL;
     list_mirror(*stack_a, &range_array);
@@ -219,19 +205,18 @@ void push_swap_sorting(p_list **stack_a, p_list **stack_b)
         list_ranger(&range_array, 5);
     else
         list_ranger(&range_array, 11);
-    
-    // p_list *pp;
-
-    // pp = range_array;
-
-    // while (pp != NULL)
-    // {
-    //     printf("val=%d | index=%d range_id=%d\n", pp->val, pp->index, pp->range_id);
-    //     pp = pp->next;
-    // }
-    push_range_to_b(stack_a, stack_b, range_array);
+    push_to_stack_b(stack_a, stack_b, &range_array);
 }
 
 
 
 
+// p_list *p;
+
+//     p = *stack_a;
+
+//     while (p != NULL)
+//     {
+//         printf("val=%d | index=%d\n", p->val, p->index);
+//         p = p->next;
+//     }
