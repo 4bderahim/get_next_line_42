@@ -235,15 +235,15 @@ int main(int argc, char **argv)
     int i = 0;
     
     p = main_b;
-    cu = main_a;
+    cu = main_b;
    // printf("\n\n|%d\n\n", main_b->val);
-    while (cu != NULL)
-    {
-        printf("\t|\t%d\n",   cu->val);
-        cu = cu->next;
-       // p = p->next;
-        i++;
-    }
+    // while (cu != NULL)
+    // {
+    //     printf("\t|\t%d\n",   cu->val);
+    //     cu = cu->next;
+    //    // p = p->next;
+    //     i++;
+    // }
     system("leaks -q a.out");
 }
 

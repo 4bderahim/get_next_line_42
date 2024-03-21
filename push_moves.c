@@ -24,7 +24,7 @@ void sa(p_list *list_a)
     tmp = list_a->next->index;
     list_a->next->index = list_a->index;
     list_a->index = tmp;
-    write(1, "sa", 2);
+    write(1, "sa\n", 3);
 }
 
 void sb(p_list *list_b)
@@ -44,6 +44,7 @@ void ss(p_list *list_a, p_list *list_b)
 {
     sa(list_a);
     sb(list_b);
+
 }
 void rra(p_list **a_list)
 {
@@ -59,6 +60,7 @@ void rra(p_list **a_list)
     last->prev = NULL;
     last->next->prev = last;
     *a_list = last;
+     printf("rra");
 }
 void rrb(p_list **b_list)
 {
@@ -74,6 +76,7 @@ void rrb(p_list **b_list)
     last->prev = NULL;
     last->next->prev = last;
     *b_list = last;
+     printf("rrb");
 }
 void rrr(p_list **b_list,p_list **a_list)
 {
@@ -98,6 +101,7 @@ void rrr(p_list **b_list,p_list **a_list)
     last_b->prev = NULL;
     last_b->next->prev = last_b;
     *b_list = last_b;
+     printf("rrr");
 
 }
 void pa(p_list **list_a, p_list **list_b)
@@ -129,6 +133,7 @@ void pa(p_list **list_a, p_list **list_b)
     }
     *list_a = tmp_a;
     *list_b = tmp_b;
+     printf("pa");
 }
 
 void pb(p_list **list_a, p_list **list_b)
@@ -150,17 +155,27 @@ void pb(p_list **list_a, p_list **list_b)
         tmp_b->prev = NULL;
     }
     else{
-        tmp_a = tmp_a->next;
-        if (tmp_a == NULL)
-            printf("\t\t@####");
-        tmp_a->prev->next = tmp_b;
-        tmp_b->prev = tmp_a->prev;
-        tmp_a->prev = NULL;
-        tmp_b = tmp_b->prev;
-        tmp_b->prev = NULL;
+        if (tmp_a->next == NULL)
+            {
+                tmp_a->next = tmp_b;
+                tmp_a->next->prev = tmp_a;
+                tmp_a->prev = NULL;
+                tmp_b = tmp_a;
+                tmp_a = NULL;
+            }
+        else
+        {
+            tmp_a = tmp_a->next;
+            tmp_a->prev->next = tmp_b;
+            tmp_b->prev = tmp_a->prev;
+            tmp_a->prev = NULL;
+            tmp_b = tmp_b->prev;
+            tmp_b->prev = NULL;
+        }
     }
     *list_a = tmp_a;
     *list_b = tmp_b;
+    printf("pb\n");
 }
 
 
@@ -176,6 +191,7 @@ void ra(p_list **a)
     last->next->next = NULL;
     last->next->prev = last;
     *a = lst_a;
+     printf("ra\n");
 }
 void rb(p_list **b)
 {
@@ -192,6 +208,7 @@ void rb(p_list **b)
     last->next->next = NULL;
     last->next->prev = last;
     *b = lst_b;
+     printf("rb\n");
 }
 
 
@@ -200,7 +217,7 @@ void rr(p_list **b, p_list **a)
     p_list *lst_b;
     p_list *last;
     p_list *lst_a;
-    
+
 
     if (*b == NULL || *a == NULL)
         return ;
@@ -221,6 +238,7 @@ void rr(p_list **b, p_list **a)
     last->next->next = NULL;
     last->next->prev = last;
     *b = lst_b;
+    printf("rr\n");
 }
 
 
