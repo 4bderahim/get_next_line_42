@@ -3,7 +3,7 @@
 int p_len(p_list *list)
 {
     int count;
-    count = 1;
+    count = 0;
 
     while (list != NULL)
     {
@@ -68,15 +68,16 @@ void rrb(p_list **b_list)
     p_list *b;
 
     b = *b_list;
-    if (b == NULL)
+    if (b == NULL || b->next == NULL)
         return ;
     last = p_last(b);
+    
     last->next = b;
     last->prev->next = NULL;
     last->prev = NULL;
     last->next->prev = last;
     *b_list = last;
-     printf("rrb");
+    printf("rrb\n");
 }
 void rrr(p_list **b_list,p_list **a_list)
 {
@@ -111,29 +112,41 @@ void pa(p_list **list_a, p_list **list_b)
     if (*list_b == NULL)
         return ;
     // if list_a is NULL; !!!!
+
     tmp_a = *list_a;
     tmp_b =  *list_b;
-    
-    if (tmp_b->next != NULL)
+    if (tmp_a == NULL)
     {
+        //tmp_p = *list;
+        tmp_a = tmp_b;
         tmp_b = tmp_b->next;
-        tmp_b->prev->next = tmp_a;
-        tmp_a->prev = tmp_b->prev;
         tmp_b->prev = NULL;
-        tmp_a = tmp_a->prev;
+        tmp_a->next = NULL;
         tmp_a->prev = NULL;
     }
-    else
-    {
-        tmp_a->prev = tmp_b;
-        tmp_b->next = tmp_a;
-        tmp_a = tmp_a->prev;
-        tmp_a->prev = NULL;
-        tmp_b = NULL;
+    else{
+        if (tmp_b->next == NULL)
+            {
+                tmp_b->next = tmp_a;
+                tmp_b->next->prev = tmp_b;
+                tmp_b->prev = NULL;
+                tmp_a = tmp_b;
+                tmp_b = NULL;
+            }
+        else
+        {
+            tmp_b = tmp_b->next;
+            tmp_b->prev->next = tmp_a;
+            tmp_a->prev = tmp_b->prev;
+            tmp_b->prev = NULL;
+            tmp_a = tmp_a->prev;
+            tmp_a->prev = NULL;
+        }
     }
+
     *list_a = tmp_a;
     *list_b = tmp_b;
-     printf("pa");
+     printf("pa\n");
 }
 
 void pb(p_list **list_a, p_list **list_b)
@@ -208,7 +221,7 @@ void rb(p_list **b)
     last->next->next = NULL;
     last->next->prev = last;
     *b = lst_b;
-     printf("rb\n");
+    printf("rb\n");
 }
 
 

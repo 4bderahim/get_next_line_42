@@ -11,6 +11,7 @@ typedef struct push_list{
     int val;
     int index;
     int range_id;
+    int index_b;
 } p_list;
 void push_swap_sorting(p_list **stack_a, p_list **stack_b);
 void sort_five(p_list **a , p_list **b, int count);

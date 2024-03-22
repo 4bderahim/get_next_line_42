@@ -14,10 +14,10 @@ p_list *p_new(int val)
 }
 p_list *p_last(p_list *node)
 {
-    if (!node)
+    if (node == NULL)
         return (NULL);
     if (node->next == NULL)
-        return node;
+            return node;
     while (node->next != NULL)
     {
         node = node->next;

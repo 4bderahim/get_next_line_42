@@ -15,6 +15,22 @@ int indexing(p_list *list)
         }
     return index+1;
 }
+int indexing_b(p_list *list)
+{
+    ///// still
+    int index;
+    p_list *t;
+
+    t = list;
+    index = 0;
+    while (t != NULL)
+        {
+            t->index_b = index;
+            t = t->next;
+            index++;
+        }
+    return index+1;
+}
 int index_from_range(p_list *ranged_list, int value)
 {
     p_list *tmp;
@@ -173,7 +189,7 @@ void push_range_to_b(p_list **stack_a, p_list **stack_b, p_list *ranged_list, in
     int i;
     i = 0;
     int range_id;
-    range_id = 15;
+    range_id = id;
     a = *stack_a;
     b = *stack_b;
     p_list *pp;
@@ -185,7 +201,7 @@ void push_range_to_b(p_list **stack_a, p_list **stack_b, p_list *ranged_list, in
             ra(&a);
             
            } 
-        else if(a->index >= i && a->index <= range_id)
+        else if(a->index > i && a->index <= range_id)
         {
             pb(&a, &b);
             i++;
@@ -201,22 +217,133 @@ void push_range_to_b(p_list **stack_a, p_list **stack_b, p_list *ranged_list, in
             i++;
             range_id++;
         }
-        
     }
+    *stack_b = b;
+    *stack_a = a;
 }
-
-int get_max(p_list *b)
+int get_index(p_list *b, int ind)
 {
     int i;
-    i = 0;
-    b = b->next;
+
+    i = 1;
     while (b != NULL)
     {
-        if (a->index > a->prev->index)
-            i = a->index;
-        a = a->next;
+        if (i == ind)
+            break;;
+        b = b->next;
+        i++;
     }
-    return (i);
+    return (b->index);
+}
+void get_it_to_top_and_pb(p_list **lst_a, p_list **lst_b, int index, int rrb_or_rb)
+{
+    p_list *a;
+    p_list *b, *d, *e;
+    char aa;
+
+    a = *lst_a;
+    
+    b = *lst_b;
+    d = b;
+    while (index != b->index_b)
+    {
+        if (rrb_or_rb == 1)
+            {
+                rb(&b);
+            }
+        else
+            {
+                rrb(&b);
+            }
+        d = b;
+        e = a;
+    }
+    pa(&a, &b);
+    *lst_a = a;
+    *lst_b = b;
+}
+int get_max(p_list *bb)
+{
+    int i;
+    int j;
+    p_list *b;
+
+    b = bb;
+    j = 1 ;
+    i = 0;
+    while (b != NULL)
+    {
+        if (b->index > i)
+            i = b->index;
+        b = b->next;
+    }
+    
+    b = bb;
+    while (b != NULL)
+    {
+        
+        if (i == b->index)
+            break;
+        b = b->next;
+    }
+    return (b->index_b);
+}
+void push_to_a(p_list **stack_a, p_list **stack_b)
+{
+    p_list *b;
+    p_list *a;
+    int middle_of_stack_b;
+    int max_index;
+
+    a = *stack_a;
+    b = *stack_b;
+    
+    p_list *d;
+    d = *stack_a;
+      
+    while (b != NULL)
+    {
+         //indexing_b(b);
+         middle_of_stack_b = p_len(b) / 2; 
+          indexing_b(b);
+         max_index = get_max(b);
+        // printf("%d___%d====\n", max_index, middle_of_stack_b );
+        
+        if (max_index <= middle_of_stack_b)
+        {
+             
+            if (b->index_b ==  max_index)
+               pa(&a, &b);
+            else
+                 get_it_to_top_and_pb(&a, &b, max_index, 1);
+        }
+        else
+        {
+           
+            // if (p_last(b)->index_b == max_index)
+            //     pa(&a, &b);
+            //else
+                get_it_to_top_and_pb(&a, &b, max_index, 2);
+        }
+        //  d = b;
+        // while (d != NULL)
+        // {
+        //     printf("\t\t%d\n", d->val);
+        //     d = d->next;
+        // }
+       
+    }
+    *stack_a = a;
+    *stack_b = b;
+    d = *stack_a;
+    // while (d != NULL)
+    //     {
+    //         printf("\t\t%d\n", d->val);
+    //         d = d->next;
+    //     }
+    
+
+    
 }
 
 void push_swap_sorting(p_list **stack_a, p_list **stack_b)
@@ -229,27 +356,24 @@ void push_swap_sorting(p_list **stack_a, p_list **stack_b)
     a = *stack_a;
     p = *stack_a;
    
-    p_list *range_array;
+    p_list *range_array, *pp;
     range_array = NULL;
     list_mirror(*stack_a, &range_array);
     normal_sort(&range_array);
     index_stack_a(*stack_a, range_array);
-    if (p_last(range_array)->index <= 99)
-        range_id = 15;
-    else
+    if (p_last(range_array)->index > 99)
         range_id = 25;
-
+    else
+        range_id = 15;
+    if (p_last(range_array)->index <= 16)
+        range_id = 5;
     list_ranger(&range_array, range_id);
     list_a_ranger(stack_a, range_array);
     
     push_range_to_b(stack_a, stack_b, range_array, range_id);
-    // pp = *stack_a;
-    //  printf("_++_+\n");
-    // while (pp != NULL)
-    // {
-    //     printf("val=%d | index=%d range_id=%d\n", pp->val, pp->index, pp->range_id);
-    //     pp = pp->next;
-    // }
+    push_to_a(stack_a, stack_b);
+    
+    pp = *stack_a;
 }
 
 
@@ -292,6 +416,51 @@ void push_swap_sorting(p_list **stack_a, p_list **stack_b)
 
 
 
+
+
+
+ 
+    
+    // if (tmp_a != NULL)
+    // {
+    //     if (tmp_b->next != NULL)
+    //     {
+    //         tmp_b = tmp_b->next;
+    //         tmp_b->prev->next = tmp_a;
+    //         tmp_a->prev = tmp_b->prev;
+    //         tmp_b->prev = NULL;
+    //         tmp_a = tmp_a->prev;
+    //         tmp_a->prev = NULL;
+    //     }
+    //     else
+    //     {
+    //         tmp_a->prev = tmp_b;
+    //         tmp_b->next = tmp_a;
+    //         tmp_a = tmp_a->prev;
+    //         tmp_a->prev = NULL;
+    //         tmp_b = NULL;   
+    //     }
+    // }
+    // else
+    // {
+    //     if (tmp_b->next != NULL)
+    //     {
+        
+    //         tmp_a = tmp_b;
+    //         tmp_a->next = NULL;
+    //         tmp_b = tmp_b->next;
+    //         tmp_b->prev = NULL;
+             
+    //     }
+    //     else
+    //     {
+    //         tmp_a = tmp_b;
+    //         tmp_b = tmp_b->next;
+    //         tmp_b->prev = NULL;
+    //         tmp_a->next = NULL;
+    //     }
+
+    // }
 
 
 
