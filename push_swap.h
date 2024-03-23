@@ -13,8 +13,10 @@ typedef struct push_list{
     int range_id;
     int index_b;
 } p_list;
+
 void push_swap_sorting(p_list **stack_a, p_list **stack_b);
-void sort_five(p_list **a , p_list **b, int count);
+void handle_five_and_less(p_list **stack_a, p_list **stack_b, int arg_count);
+//void sort_five(p_list **a , p_list **b, int count);
 int p_len(p_list *list);
 void pa(p_list **list_a, p_list **list_b);
 void pb(p_list **list_a, p_list **list_b);

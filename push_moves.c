@@ -20,6 +20,7 @@ void sa(p_list *list_a)
         return ;
     tmp = list_a->next->val;
     list_a->next->val = list_a->val;
+    list_a->next->index_b = list_a->index_b;
     list_a->val = tmp;
     tmp = list_a->next->index;
     list_a->next->index = list_a->index;
@@ -38,10 +39,11 @@ void sb(p_list *list_b)
     tmp = list_b->next->index;
     list_b->next->index = list_b->index;
     list_b->index = tmp;
-    write(1, "sb", 2);
+    write(1, "sb\n", 3);
 }
 void ss(p_list *list_a, p_list *list_b)
 {
+    //LOOL
     sa(list_a);
     sb(list_b);
 
@@ -60,7 +62,7 @@ void rra(p_list **a_list)
     last->prev = NULL;
     last->next->prev = last;
     *a_list = last;
-     printf("rra");
+     write(1, "rra\n", 4);
 }
 void rrb(p_list **b_list)
 {
@@ -77,7 +79,7 @@ void rrb(p_list **b_list)
     last->prev = NULL;
     last->next->prev = last;
     *b_list = last;
-    printf("rrb\n");
+    write(1, "rrb\n", 4);
 }
 void rrr(p_list **b_list,p_list **a_list)
 {
@@ -102,7 +104,7 @@ void rrr(p_list **b_list,p_list **a_list)
     last_b->prev = NULL;
     last_b->next->prev = last_b;
     *b_list = last_b;
-     printf("rrr");
+    write(1, "rrr\n", 4);
 
 }
 void pa(p_list **list_a, p_list **list_b)
@@ -146,7 +148,7 @@ void pa(p_list **list_a, p_list **list_b)
 
     *list_a = tmp_a;
     *list_b = tmp_b;
-     printf("pa\n");
+    write(1, "pa\n", 3);
 }
 
 void pb(p_list **list_a, p_list **list_b)
@@ -188,7 +190,8 @@ void pb(p_list **list_a, p_list **list_b)
     }
     *list_a = tmp_a;
     *list_b = tmp_b;
-    printf("pb\n");
+    write(1, "pb\n", 3);
+    
 }
 
 
@@ -204,7 +207,7 @@ void ra(p_list **a)
     last->next->next = NULL;
     last->next->prev = last;
     *a = lst_a;
-     printf("ra\n");
+     write(1, "ra\n", 3);
 }
 void rb(p_list **b)
 {
@@ -221,7 +224,7 @@ void rb(p_list **b)
     last->next->next = NULL;
     last->next->prev = last;
     *b = lst_b;
-    printf("rb\n");
+    write(1, "rb\n", 3);
 }
 
 
@@ -251,7 +254,7 @@ void rr(p_list **b, p_list **a)
     last->next->next = NULL;
     last->next->prev = last;
     *b = lst_b;
-    printf("rr\n");
+    write(1, "rr\n", 3);
 }
 
 
