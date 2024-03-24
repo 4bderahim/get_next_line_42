@@ -10,7 +10,7 @@ typedef struct push_list{
     struct push_list *prev;
     int val;
     int index;
-    int range_id;
+    //int range_id;
     int index_b;
 } p_list;
 

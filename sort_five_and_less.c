@@ -67,20 +67,18 @@ void push_last_b_value(p_list **tmp_a, p_list **tmp_b)
             sa(*tmp_a);
         }
     }
-
 }
 void pa_sa(p_list **tmp_a, p_list **tmp_b)
 {
     pa(tmp_a, tmp_b);
     sa(*tmp_a);
 }
-void sort_five(p_list **tmp_a , p_list **tmp_b, int count)
+void sort_five(p_list **tmp_a ,p_list **tmp_b, int count)
 {
     pb(tmp_a, tmp_b);
     if (count == 5)
         pb(tmp_a, tmp_b);
     handle_three(tmp_a);
-    
     if ((*tmp_b)->val < (*tmp_a)->val)
         pa(tmp_a, tmp_b);
     else if ((*tmp_b)->val > (*tmp_a)->val && (*tmp_b)->val < (*tmp_a)->next->val)
@@ -94,7 +92,6 @@ void sort_five(p_list **tmp_a , p_list **tmp_b, int count)
         parrasarara(tmp_a, tmp_b);
     if (*tmp_b != NULL)
         push_last_b_value(tmp_a, tmp_b);
-    
 }
 
 void handle_five_and_less(p_list **stack_a, p_list **stack_b, int arg_count)
@@ -107,8 +104,5 @@ void handle_five_and_less(p_list **stack_a, p_list **stack_b, int arg_count)
     else if (arg_count == 3)
         handle_three(stack_a);
     else
-        {
-            //printf("^&^&^&dewe");
-            sort_five(stack_a, stack_b, arg_count);
-        }
+        sort_five(stack_a, stack_b, arg_count);
 }

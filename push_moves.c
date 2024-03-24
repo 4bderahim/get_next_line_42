@@ -1,5 +1,7 @@
 #include "push_swap.h"
 
+
+
 int p_len(p_list *list)
 {
     int count;
@@ -105,89 +107,104 @@ void rrr(p_list **b_list,p_list **a_list)
     last_b->next->prev = last_b;
     *b_list = last_b;
     write(1, "rrr\n", 4);
+}
+void push_to_stack_a(p_list **a,  p_list **b)
+{
+    p_list *tmp_a;
+    p_list *tmp_b;
 
+    tmp_a = *a;
+    tmp_b =  *b;
+    if (tmp_b->next == NULL)
+    {
+        tmp_b->next = tmp_a;
+        tmp_b->next->prev = tmp_b;
+        tmp_b->prev = NULL;
+        tmp_a = tmp_b;
+        tmp_b = NULL;
+    }
+    else
+    {
+        tmp_b = tmp_b->next;
+        tmp_b->prev->next = tmp_a;
+        tmp_a->prev = tmp_b->prev;
+        tmp_b->prev = NULL;
+        tmp_a = tmp_a->prev;
+        tmp_a->prev = NULL;
+    }
+    *a = tmp_a;
+    *b = tmp_b;
 }
 void pa(p_list **list_a, p_list **list_b)
 {
     p_list *tmp_a;
     p_list *tmp_b;
+    
     if (*list_b == NULL)
         return ;
-    // if list_a is NULL; !!!!
-
     tmp_a = *list_a;
     tmp_b =  *list_b;
     if (tmp_a == NULL)
     {
-        //tmp_p = *list;
         tmp_a = tmp_b;
         tmp_b = tmp_b->next;
         tmp_b->prev = NULL;
         tmp_a->next = NULL;
         tmp_a->prev = NULL;
     }
-    else{
-        if (tmp_b->next == NULL)
-            {
-                tmp_b->next = tmp_a;
-                tmp_b->next->prev = tmp_b;
-                tmp_b->prev = NULL;
-                tmp_a = tmp_b;
-                tmp_b = NULL;
-            }
-        else
-        {
-            tmp_b = tmp_b->next;
-            tmp_b->prev->next = tmp_a;
-            tmp_a->prev = tmp_b->prev;
-            tmp_b->prev = NULL;
-            tmp_a = tmp_a->prev;
-            tmp_a->prev = NULL;
-        }
-    }
+    else
+        push_to_stack_a(&tmp_a, &tmp_b);
 
     *list_a = tmp_a;
     *list_b = tmp_b;
     write(1, "pa\n", 3);
 }
+void push_to_stack_b(p_list **a,  p_list **b)
+{
+    p_list *tmp_a;
+    p_list *tmp_b;
 
+    tmp_a = *a;
+    tmp_b =  *b;
+    if (tmp_a->next == NULL)
+    {
+        tmp_a->next = tmp_b;
+        tmp_a->next->prev = tmp_a;
+        tmp_a->prev = NULL;
+        tmp_b = tmp_a;
+        tmp_a = NULL;
+    }
+    else
+    {
+        tmp_a = tmp_a->next;
+        tmp_a->prev->next = tmp_b;
+        tmp_b->prev = tmp_a->prev;
+        tmp_a->prev = NULL;
+        tmp_b = tmp_b->prev;
+        tmp_b->prev = NULL;
+    }
+    *a = tmp_a;
+    *b = tmp_b;
+}
 void pb(p_list **list_a, p_list **list_b)
 {
     p_list *tmp_a;
     p_list *tmp_b;
+
     if (*list_a == NULL)
         return ;
-    
     tmp_a = *list_a;
     tmp_b =  *list_b;
     if (tmp_b == NULL)
     {
-        //tmp_p = *list;
         tmp_b = tmp_a;
         tmp_a = tmp_a->next;
         tmp_a->prev = NULL;
         tmp_b->next = NULL;
         tmp_b->prev = NULL;
     }
-    else{
-        if (tmp_a->next == NULL)
-            {
-                tmp_a->next = tmp_b;
-                tmp_a->next->prev = tmp_a;
-                tmp_a->prev = NULL;
-                tmp_b = tmp_a;
-                tmp_a = NULL;
-            }
-        else
-        {
-            tmp_a = tmp_a->next;
-            tmp_a->prev->next = tmp_b;
-            tmp_b->prev = tmp_a->prev;
-            tmp_a->prev = NULL;
-            tmp_b = tmp_b->prev;
-            tmp_b->prev = NULL;
-        }
-    }
+    else
+        push_to_stack_b(&tmp_a, &tmp_b);
     *list_a = tmp_a;
     *list_b = tmp_b;
     write(1, "pb\n", 3);
@@ -226,7 +243,6 @@ void rb(p_list **b)
     *b = lst_b;
     write(1, "rb\n", 3);
 }
-
 
 void rr(p_list **b, p_list **a)
 {

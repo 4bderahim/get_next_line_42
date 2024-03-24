@@ -11,11 +11,12 @@ $(NAME) : $(OFILES)
 	ar rcs $(NAME) $(OFILES)
 	$(CC) $(NAME) -o $(PROG_NAME)
 	
-bonus:${OBFILES}
+#bonus:${OBFILES}
 
-${OBFILES}: $(BFILES) push_swap.h
-	${CC} ${CFLAGS} -c ${BFILES}
-	ar rcs $(NAME) $(OBFILES)
+#${OBFILES}: $(BFILES) push_swap.h#
+#	${CC} ${CFLAGS} -c ${BFILES}
+#	ar rcs $(NAME)
+# $(OBFILES)
 
 %.o: %.c push_swap.h
 	$(CC) -c $< -o $@

@@ -77,13 +77,108 @@ void p_free(p_list *list)
 	}
 	list = NULL;
 }
+size_t	ft_strlen(const char *s)
+{
+	int	i;
 
- int check_args(char *s, p_list *prev_node)
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+static void	join_the_two_strings(char *all, char const *s1, char const *s2)
+{
+	size_t	i;
+	int		j;
+
+	i = 0;
+	while (s1[i])
+	{
+		all[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+	{
+		all[i] = s2[j];
+		i++;
+		j++;
+	}
+}
+
+char	*ft_strjoin(char *s1, char const *s2)
+{
+	char	*allocated;
+	size_t	string_len;
+
+	if (!s1 || !s1)
+		return (NULL);
+	string_len = ft_strlen(s1) + ft_strlen(s2);
+	allocated = (char *)malloc(string_len + 1);
+	if (!allocated)
+		return (NULL);
+    if (*s1 != 0)
+        free(s1);
+	join_the_two_strings(allocated, s1, s2);
+	allocated[string_len] = '\0';
+
+	return (allocated);
+}
+int check_full_arg_line(char *str)
+{
+    int i;
+    i = 0;
+    while (str[i])
+    {
+        if (!(str[i] >= 48 && str[i] <= 57) && str[i] != ' ')
+            {
+                if (str[i] == '+' || str[i] == '-')
+                    {
+                        if (!(str[i+1] >= 48 && str[i+1] <= 57))
+                            return (0);
+                    }
+                else
+                    return 0;
+            }
+        i++;
+    }
+    return 1;
+}
+char *full_line(char **argv, int argc)
+{
+    int i;
+    char *str;
+    i = 1;
+    str = (char *) malloc(1);
+    str[0] = 0;
+    while (argv[i])
+    {
+        str = ft_strjoin(str, argv[i]);
+        str = ft_strjoin(str, " ");
+        i++;
+    }
+    
+    if (check_full_arg_line(str) == 0)
+        {
+            write(1, "Error!", 6);
+            return (NULL);
+        }
+    else
+        {
+            if (argc == 1)
+                return NULL;
+        }
+    
+    return str;
+}
+int check_args(char *s, p_list *prev_node)
  {
     int i;
     long int num;
     i  = 0;
+    int check_stop;
 
+    check_stop = 1;
     while (s[i])
     {
         if (!(s[i] >= 48 && s[i] <= 57))
@@ -94,12 +189,16 @@ void p_free(p_list *list)
     num = p_atoi(s);
     if (num > 2147483647 || num < -2147483648)
         return 0;
-    if (prev_node != NULL)
-        if (num > prev_node->val)
-            return (1);
+    if (prev_node != NULL && check_stop != 1)
+        {
+            printf("%ld||%d\n", num, prev_node->val);
+            if (num > prev_node->val)
+                return (check_stop);
+            else
+                check_stop = 0;
+        }
     return 13;
 }
-
 
 int main(int argc, char **argv)
 {
@@ -107,71 +206,25 @@ int main(int argc, char **argv)
     p_list *main_b;
     int ii  = 1;
     int next_mv;
+    
     main_a = NULL;
     main_b = NULL;
     if (argc > 1)
-     {
+    {
+        //full_line(argv);
         while (ii < argc)
             {
                 next_mv = check_args(argv[ii], p_last(main_a));
-                if (!next_mv)
-                    {
-                        write(1, "Error!", 6);
-                        return 0;
-                    }
+                if (full_line(argv, argc-1) == NULL)
+                    return 0;
+                else if (next_mv == 1 && p_len(main_a) == argc-2)
+                    return 0;
                 p_addback(&main_a, p_new(p_atoi(argv[ii])));
                 ii++;
             }
             if (argc < 7)
                 handle_five_and_less(&main_a, &main_b, argc-1);
             else
-                {
-                    push_swap_sorting(&main_a, &main_b);
-                }
+                push_swap_sorting(&main_a, &main_b);
      }
 }
-
-
-
-// if (next_mv == 1 && ii == argc)
-            //     {
-            //         system("leaks -q a.out");
-            //         return 0;
-            //     }
-
-
-
-
-
-
-
-// if (tmp_b != NULL)
-//     {
-//         if (tmp_b->val < tmp_a->next->val)
-//         {
-//             if (tmp_b->val < tmp_a->val)
-//                 pa(&tmp_a, &tmp_b);
-//             else
-//                 {
-//                     pa(&tmp_a, &tmp_b);
-//                     sa(tmp_a);
-//                 }
-//         }
-//         else
-//             {
-//                 if (tmp_b->val > p_last(tmp_a)->val)
-//                 {
-//                     pa(&tmp_a, &tmp_b);
-//                     ra(&tmp_a);
-//                 }
-//                 else if (tmp_b->val > p_last(tmp_a)->prev->val)
-//                 {
-//                     rra(&tmp_a);
-//                     pa(&tmp_a, &tmp_b);
-//                     ra(&tmp_a);
-//                     ra(&tmp_a);
-//                 }
-
-//             }
-
-//     }
