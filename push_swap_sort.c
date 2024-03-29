@@ -110,7 +110,7 @@ void push_range_to_b(p_list **stack_a, p_list **stack_b, p_list *ranged_list, in
     {
         if (a->index > range_id)
             ra(&a);
-        else if(a->index > i && a->index <= range_id)
+        else if(a->index >= i && a->index <= range_id)
         {
             pb(&a, &b);
             i++;
@@ -128,6 +128,7 @@ void push_range_to_b(p_list **stack_a, p_list **stack_b, p_list *ranged_list, in
     *stack_b = b;
     *stack_a = a;
 }
+
 int get_index(p_list *b, int ind)
 {
     int i;

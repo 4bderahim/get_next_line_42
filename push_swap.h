@@ -13,7 +13,6 @@ typedef struct push_list{
     //int range_id;
     int index_b;
 } p_list;
-
 void push_swap_sorting(p_list **stack_a, p_list **stack_b);
 void handle_five_and_less(p_list **stack_a, p_list **stack_b, int arg_count);
 //void sort_five(p_list **a , p_list **b, int count);
@@ -34,6 +33,8 @@ p_list *p_new(int val);
 p_list *p_last(p_list *node);
 void p_addback(p_list **head, p_list *new);
 void p_free(p_list *list);
+int argument_check(char **args, p_list **a, int argc);
 #endif
 
 
+// check all cases in stack b to stack a elements befor pushing
