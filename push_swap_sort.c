@@ -109,18 +109,18 @@ void push_range_to_b(p_list **stack_a, p_list **stack_b, p_list *ranged_list, in
     while (a != NULL)
     {
         if (a->index > range_id)
-            ra(&a);
+            ra(&a, 0);
         else if(a->index >= i && a->index <= range_id)
         {
-            pb(&a, &b);
+            pb(&a, &b, 0);
             i++;
             range_id++;
         }
         else
         {
-            pb(&a, &b);
+            pb(&a, &b, 0);
             if (b->next != NULL)
-                rb(&b);
+                rb(&b, 0);
             i++;
             range_id++;
         }
@@ -157,16 +157,16 @@ void get_it_to_top_and_pb(p_list **lst_a, p_list **lst_b, int index, int rrb_or_
     {
         if (rrb_or_rb == 1)
             {
-                rb(&b);
+                rb(&b, 0);
             }
         else
             {
-                rrb(&b);
+                rrb(&b, 0);
             }
         d = b;
         e = a;
     }
-    pa(&a, &b);
+    pa(&a, &b, 0);
     *lst_a = a;
     *lst_b = b;
 }
@@ -188,7 +188,6 @@ int get_max(p_list *bb)
     b = bb;
     while (b != NULL)
     {
-        
         if (i == b->index)
             break;
         b = b->next;
@@ -206,14 +205,13 @@ void push_to_a(p_list **stack_a, p_list **stack_b)
     b = *stack_b;
     while (b != NULL)
     {
-        
         middle_of_stack_b = p_len(b) / 2; 
         indexing_b(b);
         max_index = get_max(b);
         if (max_index <= middle_of_stack_b)
         {
             if (b->index_b ==  max_index)
-               pa(&a, &b);
+               pa(&a, &b, 0);
             else
                  get_it_to_top_and_pb(&a, &b, max_index, 1);
         }

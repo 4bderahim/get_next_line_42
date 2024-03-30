@@ -1,7 +1,5 @@
 #include "push_swap.h"
 
-
-
 int p_len(p_list *list)
 {
     int count;
@@ -15,7 +13,7 @@ int p_len(p_list *list)
     return count;
 }
 
-void sa(p_list *list_a)
+void sa(p_list *list_a, int x)
 {
     int tmp;
     if (!list_a || !list_a->next)
@@ -27,10 +25,11 @@ void sa(p_list *list_a)
     tmp = list_a->next->index;
     list_a->next->index = list_a->index;
     list_a->index = tmp;
-    write(1, "sa\n", 3);
+    if (x !=1)
+        write(1, "sa\n", 3);
 }
 
-void sb(p_list *list_b)
+void sb(p_list *list_b, int x)
 {
     int tmp;
     if (!list_b || !list_b->next)
@@ -41,16 +40,17 @@ void sb(p_list *list_b)
     tmp = list_b->next->index;
     list_b->next->index = list_b->index;
     list_b->index = tmp;
-    write(1, "sb\n", 3);
+    if (x !=1)
+        write(1, "sb\n", 3);
 }
-void ss(p_list *list_a, p_list *list_b)
+void ss(p_list *list_a, p_list *list_b, int x)
 {
     //LOOL
-    sa(list_a);
-    sb(list_b);
+    // sa(list_a);
+    // sb(list_b);
 
 }
-void rra(p_list **a_list)
+void rra(p_list **a_list, int x)
 {
     p_list *last;
     p_list *a;
@@ -64,9 +64,10 @@ void rra(p_list **a_list)
     last->prev = NULL;
     last->next->prev = last;
     *a_list = last;
-     write(1, "rra\n", 4);
+    if (x !=1)
+        write(1, "rra\n", 4);
 }
-void rrb(p_list **b_list)
+void rrb(p_list **b_list, int x)
 {
     p_list *last;
     p_list *b;
@@ -81,9 +82,10 @@ void rrb(p_list **b_list)
     last->prev = NULL;
     last->next->prev = last;
     *b_list = last;
-    write(1, "rrb\n", 4);
+    if (x !=1)
+        write(1, "rrb\n", 4);
 }
-void rrr(p_list **b_list,p_list **a_list)
+void rrr(p_list **b_list,p_list **a_list, int x)
 {
     p_list *last_b;
     p_list *last_a;
@@ -106,7 +108,8 @@ void rrr(p_list **b_list,p_list **a_list)
     last_b->prev = NULL;
     last_b->next->prev = last_b;
     *b_list = last_b;
-    write(1, "rrr\n", 4);
+    if (x !=1)
+        write(1, "rrr\n", 4);
 }
 void push_to_stack_a(p_list **a,  p_list **b)
 {
@@ -135,7 +138,7 @@ void push_to_stack_a(p_list **a,  p_list **b)
     *a = tmp_a;
     *b = tmp_b;
 }
-void pa(p_list **list_a, p_list **list_b)
+void pa(p_list **list_a, p_list **list_b, int x)
 {
     p_list *tmp_a;
     p_list *tmp_b;
@@ -157,7 +160,8 @@ void pa(p_list **list_a, p_list **list_b)
 
     *list_a = tmp_a;
     *list_b = tmp_b;
-    write(1, "pa\n", 3);
+    if (x !=1)
+        write(1, "pa\n", 3);
 }
 void push_to_stack_b(p_list **a,  p_list **b)
 {
@@ -186,7 +190,7 @@ void push_to_stack_b(p_list **a,  p_list **b)
     *a = tmp_a;
     *b = tmp_b;
 }
-void pb(p_list **list_a, p_list **list_b)
+void pb(p_list **list_a, p_list **list_b, int x)
 {
     p_list *tmp_a;
     p_list *tmp_b;
@@ -207,12 +211,12 @@ void pb(p_list **list_a, p_list **list_b)
         push_to_stack_b(&tmp_a, &tmp_b);
     *list_a = tmp_a;
     *list_b = tmp_b;
-    write(1, "pb\n", 3);
-    
+    if (x !=1)
+        write(1, "pb\n", 3);
 }
 
 
-void ra(p_list **a)
+void ra(p_list **a, int x)
 {
     p_list *lst_a;
     p_list *last;
@@ -224,9 +228,10 @@ void ra(p_list **a)
     last->next->next = NULL;
     last->next->prev = last;
     *a = lst_a;
-     write(1, "ra\n", 3);
+    if (x !=1)
+        write(1, "ra\n", 3);
 }
-void rb(p_list **b)
+void rb(p_list **b, int x)
 {
     p_list *lst_b;
     p_list *last;
@@ -241,10 +246,11 @@ void rb(p_list **b)
     last->next->next = NULL;
     last->next->prev = last;
     *b = lst_b;
-    write(1, "rb\n", 3);
+    if (x !=1)
+        write(1, "rb\n", 3);
 }
 
-void rr(p_list **b, p_list **a)
+void rr(p_list **b, p_list **a, int x)
 {
     p_list *lst_b;
     p_list *last;
@@ -270,7 +276,8 @@ void rr(p_list **b, p_list **a)
     last->next->next = NULL;
     last->next->prev = last;
     *b = lst_b;
-    write(1, "rr\n", 3);
+    if (x !=1)
+        write(1, "rr\n", 3);
 }
 
 

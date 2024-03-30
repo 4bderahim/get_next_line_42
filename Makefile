@@ -3,28 +3,25 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror	
 CFILES = push_swap_main.c push_moves.c push_swap_sort.c sort_five_and_less.c
 OFILES = $(CFILES:.c=.o)
+CBFILES = get_next_instruction.c push_moves.c
+OBFILES = $(CBFILES:.c=.o)
 NAME = push_swap.a
 PROG_NAME = push_swap
+BONUS = checker
 
-all: $(NAME)
-$(NAME) : $(OFILES) 
-	ar rcs $(NAME) $(OFILES)
-	$(CC) $(NAME) -o $(PROG_NAME)
-	
-#bonus:${OBFILES}
+$(PROG_NAME) : $(OFILES) 
+	$(CC) $(OFILES) -o $(PROG_NAME)
 
-#${OBFILES}: $(BFILES) push_swap.h#
-#	${CC} ${CFLAGS} -c ${BFILES}
-#	ar rcs $(NAME)
-# $(OBFILES)
+$(BONUS):$(OBFILES)
+	$(CC) $(OBFILES) -o $(BONUS)
 
 %.o: %.c push_swap.h
 	$(CC) -c $< -o $@
 
 clean: 
-	rm -f $(OFILES)
+	rm -f $(OFILES) $(OBFILES)
 	
 fclean: clean 
-	 rm -f $(NAME)
-re: fclean all
+	 rm -f $(OFILES) $(OBFILES)
+re: fclean $(PROG_NAME) $(BONUS)
 

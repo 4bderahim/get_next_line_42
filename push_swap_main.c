@@ -235,21 +235,21 @@ int if_already_sorted_but_in_reverse(p_list *a)
     }
     return (0);
 }
-void swap_reverse(p_list **aa)
-{
+// void swap_reverse(p_list **aa)
+// {
 
-    p_list *a;
-    p_list *last;
+//     p_list *a;
+//     p_list *last;
 
-    a = *aa;
-    last = p_last(a);
+//     a = *aa;
+//     last = p_last(a);
 
     
-    while (a != last)
-     ra(&a)
-     ;
+//     while (a != last)
+//      ra(&a, 0)
+//      ;
     
-}
+// }
 
 int argument_check(char **args, p_list **a, int argc)
 {
