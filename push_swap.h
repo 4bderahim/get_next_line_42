@@ -34,6 +34,3 @@ void p_addback(p_list **head, p_list *new);
 void p_free(p_list *list);
 int argument_check(char **args, p_list **a, int argc);
 #endif
-
-
-// check all cases in stack b to stack a elements befor pushing

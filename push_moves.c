@@ -45,10 +45,27 @@ void sb(p_list *list_b, int x)
 }
 void ss(p_list *list_a, p_list *list_b, int x)
 {
-    //LOOL
-    // sa(list_a);
-    // sb(list_b);
+    int tmp;
+    int tmp2;
+    if ((!list_a || !list_a->next) || (!list_b || !list_b->next))
+        return ;
+    tmp = list_a->next->val;
+    list_a->next->val = list_a->val;
+    list_a->next->index_b = list_a->index_b;
+    list_a->val = tmp;
+    tmp = list_a->next->index;
+    list_a->next->index = list_a->index;
+    list_a->index = tmp;
 
+    tmp2 = list_b->next->val;
+    list_b->next->val = list_b->val;
+    list_b->val = tmp2;
+    tmp2 = list_b->next->index;
+    list_b->next->index = list_b->index;
+    list_b->index = tmp2;
+    
+    if (x !=1)
+        write(1, "ss\n", 3);
 }
 void rra(p_list **a_list, int x)
 {
@@ -225,6 +242,7 @@ void ra(p_list **a, int x)
     last->next = lst_a;
     lst_a = lst_a->next;
     lst_a->prev = NULL;
+      
     last->next->next = NULL;
     last->next->prev = last;
     *a = lst_a;

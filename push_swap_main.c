@@ -39,12 +39,51 @@ void p_addback(p_list **head, p_list *new)
     tmp->next = new;
     new->prev = tmp;
 }
+
+
+/////
+
+//
+
+
+
+
+
+int add_back_andcheck_max(p_list **main_a,long res, int sign , char *s)
+{
+    p_addback(main_a, p_new(res * sign));
+    if ((res * sign) > 2147483647 || (res * sign) < -2147483648)
+    {
+        free(s);
+        return (-1);
+    }
+    return (1);
+}
+long atoi_(char *s, int *sign, int *i)
+{
+    long res;
+
+    res =0;
+    while (s[*i] != ' ' && s[*i] != 0)
+    {
+        if (s[*i] == '+' || s[*i] == '-')
+        {
+            if (s[*i] == '-')
+            *sign *= -1;
+            (*i)++;
+        }
+        res  = (res * 10) + (s[*i] - 48);
+        (*i)++;
+    }
+    return (res);
+}
 long int p_atoi(char *s, p_list **main_a)
 {
     int i;
-    int sign = 1;
+    int sign;
     long res;
     
+    sign = 1;
     res = 0;
     i = 0;
     while(s[i] == ' ')
@@ -54,31 +93,17 @@ long int p_atoi(char *s, p_list **main_a)
             break;
         if (s[i] != ' ')
         {
-            while (s[i] != ' ' && s[i] != 0)
-            {
-                if (s[i] == '+' || s[i] == '-')
-                {
-                    if (s[i] == '-')
-                    sign *= -1;
-                    i++;
-                }
-                res  = (res * 10) + (s[i] - 48);
-                i++;
-            }
-            p_addback(main_a, p_new(res * sign));
-            if ((res * sign) > 2147483647 || (res * sign) < -2147483648)
-                {
-                    free(s);
-                    return (-1);
-                }
+            res = atoi_(s, &sign, &i);
+            if (add_back_andcheck_max(main_a, res, sign , s) == -1)
+                return (-1);
             res = 0;
             sign = 1;
         }
-        
     }
     free(s);
 	return (res * sign);
 }
+
 void p_free(p_list *list)
 {
 
@@ -219,10 +244,10 @@ int if_already_sorted(p_list *a)
     while (a->next != NULL)
     {
         if (a->val > a->next->val)
-            return (1);
+            return (0);
         a = a->next;
     }
-    return (0);
+    return (1);
 }
 int if_already_sorted_but_in_reverse(p_list *a)
 {
@@ -235,21 +260,6 @@ int if_already_sorted_but_in_reverse(p_list *a)
     }
     return (0);
 }
-// void swap_reverse(p_list **aa)
-// {
-
-//     p_list *a;
-//     p_list *last;
-
-//     a = *aa;
-//     last = p_last(a);
-
-    
-//     while (a != last)
-//      ra(&a, 0)
-//      ;
-    
-// }
 
 int argument_check(char **args, p_list **a, int argc)
 {
@@ -274,7 +284,6 @@ int main(int argc, char **argv)
     p_list *main_b;
     int ii  = 1;
     int arg_check;
-
     
     if (argc == 1)  
         return (0);
@@ -288,7 +297,7 @@ int main(int argc, char **argv)
         write(0, "Error\n" ,6);
         return (0);
     }
-    if (if_already_sorted(main_a) == 0 )
+    if (if_already_sorted(main_a))
         return (0);
     // if (if_already_sorted_but_in_reverse(main_a) == 0)
     //     swap_reverse(&main_a);
@@ -302,4 +311,45 @@ int main(int argc, char **argv)
 }
 
 
+
+// long int p_atoi(char *s, p_list **main_a)
+// {
+//     int i;
+//     int sign = 1;
+//     long res;
+    
+//     res = 0;
+//     i = 0;
+//     while(s[i] == ' ')
+//     {
+//         i++;
+//         if (s[i] == 0)
+//             break;
+//         if (s[i] != ' ')
+//         {
+//             while (s[i] != ' ' && s[i] != 0)
+//             {
+//                 if (s[i] == '+' || s[i] == '-')
+//                 {
+//                     if (s[i] == '-')
+//                     sign *= -1;
+//                     i++;
+//                 }
+//                 res  = (res * 10) + (s[i] - 48);
+//                 i++;
+//             }
+//             p_addback(main_a, p_new(res * sign));
+//             if ((res * sign) > 2147483647 || (res * sign) < -2147483648)
+//                 {
+//                     free(s);
+//                     return (-1);
+//                 }
+//             res = 0;
+//             sign = 1;
+//         }
+        
+//     }
+//     free(s);
+// 	return (res * sign);
+// }
 

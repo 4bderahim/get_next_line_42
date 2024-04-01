@@ -21,9 +21,9 @@ p_list *p_last(p_list *node)
     }
     return node;
 }
-void p_addback(p_list **head, p_list *new)
+void    p_addback(p_list **head, p_list *new)
 {
-    p_list *tmp;
+    p_list  *tmp;
     if (!head)
          return ;
     tmp = p_last(*head);
@@ -35,12 +35,41 @@ void p_addback(p_list **head, p_list *new)
     tmp->next = new;
     new->prev = tmp;
 }
+int add_back_andcheck_max(p_list **main_a,long res, int sign , char *s)
+{
+    p_addback(main_a, p_new(res * sign));
+    if ((res * sign) > 2147483647 || (res * sign) < -2147483648)
+    {
+        free(s);
+        return (-1);
+    }
+    return (1);
+}
+long atoi_(char *s, int *sign, int *i)
+{
+    long res;
+
+    res =0;
+    while (s[*i] != ' ' && s[*i] != 0)
+    {
+        if (s[*i] == '+' || s[*i] == '-')
+        {
+            if (s[*i] == '-')
+            *sign *= -1;
+            (*i)++;
+        }
+        res  = (res * 10) + (s[*i] - 48);
+        (*i)++;
+    }
+    return (res);
+}
 long int p_atoi(char *s, p_list **main_a)
 {
     int i;
-    int sign = 1;
+    int sign;
     long res;
     
+    sign = 1;
     res = 0;
     i = 0;
     while(s[i] == ' ')
@@ -50,27 +79,12 @@ long int p_atoi(char *s, p_list **main_a)
             break;
         if (s[i] != ' ')
         {
-            while (s[i] != ' ' && s[i] != 0)
-            {
-                if (s[i] == '+' || s[i] == '-')
-                {
-                    if (s[i] == '-')
-                    sign *= -1;
-                    i++;
-                }
-                res  = (res * 10) + (s[i] - 48);
-                i++;
-            }
-            p_addback(main_a, p_new(res * sign));
-            if ((res * sign) > 2147483647 || (res * sign) < -2147483648)
-                {
-                    free(s);
-                    return (-1);
-                }
+            res = atoi_(s, &sign, &i);
+            if (add_back_andcheck_max(main_a, res, sign , s) == -1)
+                return (-1);
             res = 0;
             sign = 1;
         }
-        
     }
     free(s);
 	return (res * sign);
@@ -213,10 +227,10 @@ int if_already_sorted(p_list *a)
     while (a->next != NULL)
     {
         if (a->val > a->next->val)
-            return (1);
+            return (0);
         a = a->next;
     }
-    return (0);
+    return (1);
 }
 int if_already_sorted_but_in_reverse(p_list *a)
 {
@@ -234,12 +248,17 @@ int argument_check(char **args, p_list **a, int argc)
     char *line;
 
     line = full_line(args,  argc-1);
+    
     if (!line)
         {
             return (0);
         }
+    
     if (p_atoi(line, a) == -1)    
-        return (-1);
+        {
+            
+            return (-1);
+        }
     if (check_duplicates(*a) == 0)
         {
             return (0);
@@ -282,33 +301,38 @@ char	*ft_calloc(size_t count, size_t size)
 	}
 	return (all);
 }
-
 int check_instruction(char *n)
 {
     char *defs;
     int i;
-
-    i = 0;
     defs = "pa\npb\nsa\nsb\nss\nra\nrb\nrr\nrra\nrrb\nrrr\n";
     while (*defs)
     {
+        i = 0;
         if (*defs == n[0])
             {
                while (n[i])
                {
                     if(*(defs+i) == n[i])
-                        i++;
+                        {
+                            if (n[i] == '\n' )
+                                break;
+                        }
                     else
                         {
                             i = 0;
                             break;
                         }
-               } 
+                    i++;
+               }
                if (i != 0)
-                return (1);
+                {
+                    return (1);
+                }
             }
         defs++;
     }
+    
     return (0);
 }
 void other_instructions(p_list **main_a,p_list **main_b, char *str)
@@ -332,9 +356,7 @@ int do_instruction(p_list **a, p_list **b, char *str)
             if (str[0] == 'p' && str[1] == 'a')
                 pa(a, b, 1);
             if (str[0] == 'p' && str[1] == 'b')
-                {
-                    pb(a, b, 1);
-                }
+                pb(a, b, 1);
             if (str[0] == 's' && str[1] == 'a')
                 sa(*a, 1);
             if (str[0] == 's' && str[1] == 'b')
@@ -352,51 +374,91 @@ int do_instruction(p_list **a, p_list **b, char *str)
         other_instructions(a, b, str);
     return (1);
 }
+int check_input(p_list **main_a, p_list **main_b, char *pocket, char *buf)
+{
+    if (ft_strlen(pocket) < 3)
+    {
+        free(pocket);
+        free(buf);
+        return (0);
+    }
+    if (!do_instruction(main_a, main_b, pocket))
+    {
+        free(pocket);
+        free(buf);
+        
+        return (0);
+    }
+    return (1);
+}
+int free_pocket_free_buf_return_z(char *buf, char *pocket, int x)
+    {
+        free(pocket);
+        free(buf);
+        return (x);
+    }
+int hit_enter_but_no_inst(char *buf, char *pocket, int x)
+{
+    if (x == 1)
+        return (free_pocket_free_buf_return_z(buf, pocket, 1));
+    return (free_pocket_free_buf_return_z(buf, pocket, 0));
+}
+int (free_buf_pocket_ret_1(char *buf,char *pocket))
+{
+    free(pocket);
+    free(buf);
+    return (1);
+}
 int listening_to_stdin(p_list **main_a,p_list **main_b)
 {
-    p_list *p;
     char	*buf;
     char *pocket;
-	int		cc;
-    int buffz;
-
-    buffz = 4;
-    pocket = (char *) malloc(1);
-    pocket[0] = 0;
-    cc = 1;
-    while (cc != 0)
+    int x;
+    
+    x = 0;
+    pocket = (char *) ft_calloc(1,1);
+    buf = (char *)ft_calloc(1, 2);
+    while (read(0, buf, 1) != 0)
 	{
-		buf = (char *)ft_calloc(1, buffz + 1);
-		cc = read(0, buf, buffz);
-		if (cc == -1 || (cc == 0))
-		{
-            printf("\n\n###\n\n\n");
-			free(buf);
-			return (0);
-		}
-        printf("\t\t\t[%s]\n\n", buf);
-		if (buf[0] == '\n' || ft_strlen(buf) < 3)
-		{
-			free(buf);
-            break;
-		}
-        if (buf[2] == '\n' || buf[3] == '\n')
-                {
-                    if (!do_instruction(main_a, main_b, buf))
-                        {
-                            free(buf);
-                            break;
-                        }
-                }
-        
-    }
-    p = *main_a;
-    while (p != NULL)
-        {
-            printf("\t[%d]\n", p->val);
-            p = p->next;
+        pocket = ft_strjoin(pocket, buf);
+        if (pocket[0] == '\n')
+            return (hit_enter_but_no_inst(buf, pocket, x));
+        if (buf[0] == '\n')
+        { 
+            if (check_input(main_a, main_b, pocket, buf) == 0)
+                return (0);
+            else
+            {
+                free(pocket);
+                pocket = (char *) ft_calloc(1,1);
+            }
         }
+        x = 1;
+    }
+    return (free_buf_pocket_ret_1(buf, pocket));
+}
+int is_sorted(p_list *a)
+{
+    if (a->next == NULL)
+        return (1);
+    a = a->next;
+    while (a != NULL)
+    {
+        if (a->val < a->prev->val)
+        {
+            return (0);
+        }
+        a = a->next;
+    }
     return (1);
+}
+int make_decision(p_list *main_a,p_list *main_b)
+{
+    if (is_sorted(main_a) && main_b == NULL)
+        write(1, "OK\n", 3);
+    else
+        write(1, "KO\n", 3);
+    return (0);
 }
 int main(int argc, char **argv)
 {
@@ -404,12 +466,9 @@ int main(int argc, char **argv)
     p_list *main_b;
 	int arg_check;
 
-     
     main_a = NULL;
     main_b = NULL;
-	
-    
-    if (argc > 1)
+    if (argc >= 1)
         {
             arg_check = argument_check(argv, &main_a, argc);
             if (arg_check == -1)
@@ -420,8 +479,14 @@ int main(int argc, char **argv)
                 return (0);
             }
         }
-	listening_to_stdin(&main_a, &main_b);
-	return (0);
+    if (if_already_sorted(main_a)) 
+        return (0);
+	if (listening_to_stdin(&main_a, &main_b) == 0)
+       {
+        write(1, "error\n", 6);
+        return (0);
+       }
+    return (make_decision(main_a, main_b));
 }
 
 
@@ -429,87 +494,41 @@ int main(int argc, char **argv)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// char	*line_join(char *pocket, int fd)
+ 
+// int listening_to_stdin(p_list **main_a,p_list **main_b)
 // {
-// 	char	*buf;
+//     char	*buf;
+//     char *pocket;
 // 	int		cc;
+//     int x = 0;
 
-// 	cc = 1;
-// 	while (cc != 0)
+//     pocket = (char *) ft_calloc(1,1);
+//     cc = 1;
+//     while (cc != 0)
 // 	{
-// 		buf = (char *)ft_calloc(1, BUFFER_SIZE + 1);
-// 		cc = read(fd, buf, BUFFER_SIZE);
-// 		if (cc == -1 || ((cc == 0) && (!pocket || !pocket[0])))
-// 		{
-// 			free(pocket);
-// 			free(buf);
-// 			return (NULL);
-// 		}
-// 		pocket = ft_strjoin(pocket, buf);
-// 		if (ft_strchr(pocket, '\n'))
-// 		{
-// 			free(buf);
-// 			return (pocket);
-// 		}
-// 		free(buf);
-// 	}
-// 	return (pocket);
-// }
-
-// char	*first_line(char *rest)
-// {
-// 	char	*buf;
-// 	int		i;
-
-// 	i = 1;
-// 	buf = ft_calloc(ft_strlen(rest), 1);
-// 	while (rest[i])
-// 	{
-// 		*buf = rest[i];
-// 		i++;
-// 		buf++;
-// 	}
-// 	return (buf);
-// }
-
-// char	*get_next_line(int fd)
-// {
-// 	static char	*pocket;
-// 	char		*new_line_check;
-// 	char		*buffer;
-
-// 	if (fd < 0 || BUFFER_SIZE <= 0)
-// 	{
-// 		free(pocket);
-// 		return (NULL);
-// 	}
-// 	pocket = line_join(pocket, fd);
-// 	if (pocket == NULL)
-// 		return (NULL);
-// 	new_line_check = ft_strchr(pocket, '\n');
-// 	if (new_line_check)
-// 		buffer = pocket_change(pocket);
-// 	else
-// 	{
-// 		buffer = ft_strjoin(pocket, "");
-// 		pocket = NULL;
-// 		return (buffer);
-// 	}
-// 	pocket = souv(pocket, new_line_check);
-// 	return (buffer);
+// 		buf = (char *)ft_calloc(1, 2);
+// 		cc = read(0, buf, 1);
+// 		if (cc == -1 || (cc == 0))
+//             return free_pocket_free_buf_return_z(buf, pocket, 1);
+//         pocket = ft_strjoin(pocket, buf);
+//         if (pocket[0] == '\n')
+//             {
+//                 if (x == 1)
+//                     return free_pocket_free_buf_return_z(buf, pocket, 1);
+//                 return free_pocket_free_buf_return_z(buf, pocket, 0);
+//             }
+//         if (buf[0] == '\n')
+//         { 
+//             if (check_input(main_a, main_b, pocket, buf) == 0)
+//                 return (0);
+//             else
+//             {
+//                 free(pocket);
+//                 pocket = (char *) ft_calloc(1,1);
+//             }
+//         }
+//         x = 1;
+//         free(buf);
+//     }
+//     return (1);
 // }
