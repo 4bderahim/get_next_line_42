@@ -1,21 +1,19 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 
-#ifndef PUSH
-#define PUSH
+#ifndef PUSH_SWAP
+#define PUSH_SWAP
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct push_list{   
     struct push_list *next;
     struct push_list *prev;
     int val;
     int index;
-    //int range_id;
     int index_b;
 } p_list;
+size_t	ft_strlen(const char *s);
 void push_swap_sorting(p_list **stack_a, p_list **stack_b);
 void handle_five_and_less(p_list **stack_a, p_list **stack_b, int arg_count);
-//void sort_five(p_list **a , p_list **b, int count);
 int p_len(p_list *list);
 void pa(p_list **list_a, p_list **list_b, int x);
 void pb(p_list **list_a, p_list **list_b, int x);
@@ -32,5 +30,11 @@ p_list *p_new(int val);
 p_list *p_last(p_list *node);
 void p_addback(p_list **head, p_list *new);
 void p_free(p_list *list);
+int add_back_andcheck_max(p_list **main_a,long res, int sign , char *s);
+long int p_atoi(char *s, p_list **main_a);
 int argument_check(char **args, p_list **a, int argc);
+char	*ft_strjoin(char *s1, char const *s2);
+int check_input(p_list **main_a, p_list **main_b, char *pocket, char *buf);
+int listening_to_stdin(p_list **main_a,p_list **main_b);
+
 #endif
