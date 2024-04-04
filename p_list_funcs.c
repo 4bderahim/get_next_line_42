@@ -1,17 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   p_list_funcs.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ael-krid <ael-krid@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/04 02:52:22 by ael-krid          #+#    #+#             */
+/*   Updated: 2024/04/04 02:52:25 by ael-krid         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-p_list	*p_new(int val)
+t_list	*p_new(int val)
 {
-	p_list	*new;
+	t_list	*new;
 
-	new = (p_list *)malloc(sizeof(p_list));
+	new = (t_list *)malloc(sizeof(t_list));
 	new->val = val;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
 }
 
-p_list	*p_last(p_list *node)
+t_list	*p_last(t_list *node)
 {
 	if (node == NULL)
 		return (NULL);
@@ -23,9 +35,10 @@ p_list	*p_last(p_list *node)
 	}
 	return (node);
 }
-void	p_addback(p_list **head, p_list *new)
+
+void	p_addback(t_list **head, t_list *new)
 {
-	p_list	*tmp;
+	t_list	*tmp;
 
 	if (!head)
 		return ;
@@ -39,9 +52,9 @@ void	p_addback(p_list **head, p_list *new)
 	new->prev = tmp;
 }
 
-void	p_free(p_list *list)
+void	p_free(t_list *list)
 {
-	p_list	*tmp;
+	t_list	*tmp;
 
 	if (!list)
 		return ;
@@ -54,7 +67,7 @@ void	p_free(p_list *list)
 	list = NULL;
 }
 
-int	add_back_andcheck_max(p_list **main_a, long res, int sign, char *s)
+int	add_back_andcheck_max(t_list **main_a, long res, int sign, char *s)
 {
 	p_addback(main_a, p_new(res * sign));
 	if ((res * sign) > 2147483647 || (res * sign) < -2147483648)

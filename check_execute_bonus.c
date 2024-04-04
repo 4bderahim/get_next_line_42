@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_execute_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ael-krid <ael-krid@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/04 02:52:50 by ael-krid          #+#    #+#             */
+/*   Updated: 2024/04/04 02:52:52 by ael-krid         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	check_instruction(char *n)
@@ -18,6 +30,8 @@ int	check_instruction(char *n)
 					if (n[i] == '\n')
 						return (1);
 				}
+				else
+					break ;
 				i++;
 			}
 		}
@@ -26,7 +40,7 @@ int	check_instruction(char *n)
 	return (0);
 }
 
-void	other_instructions(p_list **main_a, p_list **main_b, char *str)
+void	other_instructions(t_list **main_a, t_list **main_b, char *str)
 {
 	if (str[0] == 'r' && str[1] == 'r')
 	{
@@ -39,9 +53,9 @@ void	other_instructions(p_list **main_a, p_list **main_b, char *str)
 	}
 }
 
-int	do_instruction(p_list **a, p_list **b, char *str)
+int	do_instruction(t_list **a, t_list **b, char *str)
 {
-	if (check_instruction(str) == 0)
+	if (check_instruction(str) == 0 || ft_strlen(str) > 4)
 		return (0);
 	if (str[2] == '\n')
 	{
@@ -67,20 +81,21 @@ int	do_instruction(p_list **a, p_list **b, char *str)
 	return (1);
 }
 
-int	check_input(p_list **main_a, p_list **main_b, char *pocket, char *buf)
+int	check_input(t_list **main_a, t_list **main_b, char *pocket, char *buf)
 {
 	if (ft_strlen(pocket) < 3)
 	{
 		free(pocket);
 		free(buf);
-		return (0);
+		write(2, "error\n", 6);
+		exit(0);
 	}
 	if (!do_instruction(main_a, main_b, pocket))
 	{
 		free(pocket);
 		free(buf);
-
-		return (0);
+		write(2, "error\n", 6);
+		exit(0);
 	}
 	return (1);
 }

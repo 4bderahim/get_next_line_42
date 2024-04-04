@@ -1,4 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   arg_checks.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ael-krid <ael-krid@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/04 02:50:47 by ael-krid          #+#    #+#             */
+/*   Updated: 2024/04/04 02:50:50 by ael-krid         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
+#include <stdio.h>
 
 int	check_full_arg_line(char *str)
 {
@@ -23,20 +36,18 @@ int	check_full_arg_line(char *str)
 	}
 	return (1);
 }
-char	*full_line(char **argv, int argc)
+
+char	*full_line(char **argv)
 {
 	int		i;
 	char	*str;
-	char	*str1;
 
-	if (argc == 0)
-		return (NULL);
 	i = 1;
 	str = (char *)malloc(1);
 	str[0] = 0;
 	while (argv[i])
 	{
-		if (argv[i][0] == '\0')
+		if (is_empty_str(argv[i]) || argv[i][0] == '\0')
 		{
 			free(str);
 			return (NULL);
@@ -45,14 +56,15 @@ char	*full_line(char **argv, int argc)
 		str = ft_strjoin(str, argv[i]);
 		i++;
 	}
-	if (check_full_arg_line(str) == 0)
+	if (check_full_arg_line(str) == 0 || i == -111)
 	{
 		free(str);
 		return (NULL);
 	}
 	return (str);
 }
-int	check_dups(p_list *a, int value)
+
+int	check_dups(t_list *a, int value)
 {
 	if (a->next == NULL)
 		return (1);
@@ -65,7 +77,8 @@ int	check_dups(p_list *a, int value)
 	}
 	return (1);
 }
-int	check_duplicates(p_list *a)
+
+int	check_duplicates(t_list *a)
 {
 	while (a != NULL)
 	{
@@ -75,32 +88,17 @@ int	check_duplicates(p_list *a)
 	}
 	return (1);
 }
-int	argument_check(char **args, p_list **a, int argc)
+
+int	argument_check(char **args, t_list **a, int argc)
 {
 	char	*line;
 
-	line = full_line(args, argc - 1);
+	if (argc < 2)
+		return (0);
+	line = full_line(args);
 	if (!line)
-	{
 		return (0);
-	}
-	if (p_atoi(line, a) == -1)
-		return (-1);
-	if (check_duplicates(*a) == 0)
-	{
+	if (p_atoi(line, a) == -1 || check_duplicates(*a) == 0)
 		return (0);
-	}
 	return (1);
 }
-
-// int if_already_sorted_but_in_reverse(p_list *a)
-// {
-//     a = p_last(a);
-//      while (a->prev != NULL)
-//     {
-//         if (a->val > a->prev->val)
-//             return (1);
-//         a = a->prev;
-//     }
-//     return (0);
-// }
