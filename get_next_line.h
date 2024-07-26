@@ -6,7 +6,7 @@
 /*   By: ael-krid <ael-krid@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:39:29 by ael-krid          #+#    #+#             */
-/*   Updated: 2024/01/23 18:39:30 by ael-krid         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:29:16 by ael-krid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #  define BUFFER_SIZE 42
 # endif
 
-
+# include <stdlib.h>
 # include <unistd.h>
 
 char	*get_next_line(int fd);
