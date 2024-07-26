@@ -1,4 +1,0 @@
-based on the BUFFER_SIZE number you need to read the target file suing read() system call.
-then return each line on each call of our function..
-
-if our readed buffer contains more than one line we should only return the first line and keep the rest of the buffer for the next call .. we do this using a static variable which keeps its data during the lifeTime of out program.
